@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,10 +64,7 @@ export default function Home() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-light-blue">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          <div className="flex flex-col items-start">
-            <h1 className="text-2xl font-bold text-brand-navy leading-tight">NIKOLiL</h1>
-            <span className="text-xs text-brand-brown">Crafting pearls</span>
-          </div>
+          <Logo size="small" />
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8">
@@ -130,12 +128,13 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-brand-navy via-brand-light-blue to-brand-brown rounded-2xl h-96 flex items-center justify-center shadow-xl overflow-hidden">
+            <div className="relative bg-gradient-to-br from-brand-navy via-brand-light-blue to-brand-brown rounded-2xl h-96 flex items-center justify-center shadow-2xl overflow-hidden group">
               <img
                 src="/images/nicole-hero.jpg"
-                alt="ניקול איליבסקי"
-                className="w-full h-full object-cover"
+                alt="ניקול איליבסקי - מייסדת NIKOLiL"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>
@@ -292,11 +291,22 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <footer
+        className="text-white py-12 px-4 sm:px-6 lg:px-8 relative"
+        style={{
+          backgroundImage: 'url(/images/logo-pattern.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: '#1a1a1a'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/90 to-gray-900/95 pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4 text-brand-light-blue">NIKOLiL</h3>
+              <div className="mb-4 text-brand-off-white">
+                <Logo size="small" />
+              </div>
               <p className="text-gray-400">קורס ציפורניים מקצועי עם ניקול איליבסקי</p>
             </div>
 
