@@ -61,23 +61,24 @@ export default function Home() {
   return (
     <div dir="rtl" className="min-h-screen bg-white">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-light-blue">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-brand-pink">Nail Artistry</h1>
+          <div className="flex flex-col items-start">
+            <h1 className="text-2xl font-bold text-brand-navy leading-tight">NIKOLiL</h1>
+            <span className="text-xs text-brand-brown">Crafting pearls</span>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-8">
-            <button onClick={() => scrollToSection('hero')} className="text-gray-700 hover:text-brand-pink transition">עמוד הבית</button>
-            <button onClick={() => scrollToSection('story')} className="text-gray-700 hover:text-brand-pink transition">הסיפור שלי</button>
-            <button onClick={() => scrollToSection('why')} className="text-gray-700 hover:text-brand-pink transition">למה הקורס</button>
-            <button onClick={() => scrollToSection('faq')} className="text-gray-700 hover:text-brand-pink transition">שאלות נפוצות</button>
+            <button onClick={() => scrollToSection('hero')} className="text-gray-700 hover:text-brand-navy transition">עמוד הבית</button>
+            <button onClick={() => scrollToSection('story')} className="text-gray-700 hover:text-brand-navy transition">הסיפור שלי</button>
+            <button onClick={() => scrollToSection('why')} className="text-gray-700 hover:text-brand-navy transition">למה הקורס</button>
+            <button onClick={() => scrollToSection('faq')} className="text-gray-700 hover:text-brand-navy transition">שאלות נפוצות</button>
           </div>
 
           <button
             onClick={() => scrollToSection('cta')}
-            className="hidden md:block px-6 py-2 bg-brand-pink text-white rounded-lg hover:bg-brand-rose transition"
+            className="hidden md:block px-6 py-2 bg-brand-navy text-white rounded-lg hover:bg-brand-brown transition"
           >
             התחלה
           </button>
@@ -95,13 +96,13 @@ export default function Home() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 p-4">
             <div className="flex flex-col gap-4">
-              <button onClick={() => scrollToSection('hero')} className="text-right text-gray-700 hover:text-brand-pink">עמוד הבית</button>
-              <button onClick={() => scrollToSection('story')} className="text-right text-gray-700 hover:text-brand-pink">הסיפור שלי</button>
-              <button onClick={() => scrollToSection('why')} className="text-right text-gray-700 hover:text-brand-pink">למה הקורס</button>
-              <button onClick={() => scrollToSection('faq')} className="text-right text-gray-700 hover:text-brand-pink">שאלות נפוצות</button>
+              <button onClick={() => scrollToSection('hero')} className="text-right text-gray-700 hover:text-brand-navy">עמוד הבית</button>
+              <button onClick={() => scrollToSection('story')} className="text-right text-gray-700 hover:text-brand-navy">הסיפור שלי</button>
+              <button onClick={() => scrollToSection('why')} className="text-right text-gray-700 hover:text-brand-navy">למה הקורס</button>
+              <button onClick={() => scrollToSection('faq')} className="text-right text-gray-700 hover:text-brand-navy">שאלות נפוצות</button>
               <button
                 onClick={() => scrollToSection('cta')}
-                className="w-full px-4 py-2 bg-brand-pink text-white rounded-lg hover:bg-brand-rose transition"
+                className="w-full px-4 py-2 bg-brand-navy text-white rounded-lg hover:bg-brand-brown transition"
               >
                 התחלה
               </button>
@@ -111,7 +112,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="hero" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-pink-50 to-rose-50 min-h-screen flex items-center">
+      <section id="hero" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-cream to-brand-light-blue min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -123,17 +124,18 @@ export default function Home() {
               </p>
               <button
                 onClick={() => scrollToSection('cta')}
-                className="px-8 py-4 bg-brand-pink text-white text-lg font-semibold rounded-lg hover:bg-brand-rose transition transform hover:scale-105"
+                className="px-8 py-4 bg-brand-navy text-white text-lg font-semibold rounded-lg hover:bg-brand-brown transition transform hover:scale-105"
               >
                 התחילי עכשיו
               </button>
             </div>
 
-            <div className="bg-gradient-to-br from-brand-pink via-pink-300 to-brand-rose rounded-2xl h-96 flex items-center justify-center shadow-xl">
-              <div className="text-white text-center">
-                <div className="text-6xl mb-4">✨</div>
-                <p className="text-xl font-semibold">תמונה יתיווסף כאן</p>
-              </div>
+            <div className="bg-gradient-to-br from-brand-navy via-brand-light-blue to-brand-brown rounded-2xl h-96 flex items-center justify-center shadow-xl overflow-hidden">
+              <img
+                src="/images/nicole-hero.jpg"
+                alt="ניקול איליבסקי"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -144,22 +146,22 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">הסיפור שלי</h2>
 
-          <div className="bg-white rounded-xl border-2 border-pink-100 p-8 md:p-12">
+          <div className="bg-brand-cream rounded-xl border-2 border-brand-light-blue p-8 md:p-12">
             <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
               <p>
-                <strong className="text-brand-pink">בגיל 12</strong> התחלתי עם עניין קטן לציפורניים. לא היה זה בתוכנית, אבל משהו בקסום לי בעבודה הקטנה, המדויקת, היצירתית הזו.
+                <strong className="text-brand-navy">בגיל 12</strong> התחלתי עם עניין קטן לציפורניים. לא היה זה בתוכנית, אבל משהו בקסום לי בעבודה הקטנה, המדויקת, היצירתית הזו.
               </p>
 
               <p>
-                <strong className="text-brand-pink">בגיל 16</strong> פתחתי את העסק הראשון שלי. זה לא היה קל - טעויות, בעיות של לקוחות, קשיים טכניים. אבל כל טעות הייתה לי שיעור.
+                <strong className="text-brand-navy">בגיל 16</strong> פתחתי את העסק הראשון שלי. זה לא היה קל - טעויות, בעיות של לקוחות, קשיים טכניים. אבל כל טעות הייתה לי שיעור.
               </p>
 
               <p>
-                <strong className="text-brand-pink">בגיל 18</strong> עברתי לתל אביב והקמתי את הסטודיו שלי. בנית יומן לקוחות מלא, שיטות עבודה שמעבודה, מכיר כמו לא מישהו אחר את הביטחון שצריך לקחת עם כל לקוח חדש.
+                <strong className="text-brand-navy">בגיל 18</strong> עברתי לתל אביב והקמתי את הסטודיו שלי. בנית יומן לקוחות מלא, שיטות עבודה שמעבודה, מכיר כמו לא מישהו אחר את הביטחון שצריך לקחת עם כל לקוח חדש.
               </p>
 
               <p>
-                <strong className="text-brand-pink">היום</strong> אני מלמדת מה שלמדתי הקשה - במהירות, בצורה חכמה, ביעילות. לא רוצה שתלמידות שלי יעברו את כל השגיאות שעברתי.
+                <strong className="text-brand-navy">היום</strong> אני מלמדת מה שלמדתי הקשה - במהירות, בצורה חכמה, ביעילות. לא רוצה שתלמידות שלי יעברו את כל השגיאות שעברתי.
               </p>
             </div>
           </div>
@@ -167,30 +169,30 @@ export default function Home() {
       </section>
 
       {/* Why Section */}
-      <section id="why" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section id="why" className="py-20 px-4 sm:px-6 lg:px-8 bg-brand-cream">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">למה הקורס שלי</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition">
+            <div className="bg-brand-off-white rounded-xl p-8 shadow-sm hover:shadow-lg transition border border-brand-light-blue">
               <div className="text-4xl mb-4">🏗️</div>
-              <h3 className="text-xl font-bold text-brand-pink mb-4">בסיס מקצועי</h3>
+              <h3 className="text-xl font-bold text-brand-navy mb-4">בסיס מקצועי</h3>
               <p className="text-gray-700">
                 לא רק טריקים חדשים - אני מלמדת אותך את הנכון. היסוד שמחזיק קורה לאורך זמן, לא רק חודשים.
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition">
+            <div className="bg-brand-off-white rounded-xl p-8 shadow-sm hover:shadow-lg transition border border-brand-light-blue">
               <div className="text-4xl mb-4">👥</div>
-              <h3 className="text-xl font-bold text-brand-pink mb-4">ליווי נמשך</h3>
+              <h3 className="text-xl font-bold text-brand-navy mb-4">ליווי נמשך</h3>
               <p className="text-gray-700">
                 הקורס לא מסתיים כשמסתיים. אני נשארת כאן לשאלות, טיפים, חסמים שנתקלת בהם בדרך.
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition">
+            <div className="bg-brand-off-white rounded-xl p-8 shadow-sm hover:shadow-lg transition border border-brand-light-blue">
               <div className="text-4xl mb-4">💪</div>
-              <h3 className="text-xl font-bold text-brand-pink mb-4">ניסיון אמיתי</h3>
+              <h3 className="text-xl font-bold text-brand-navy mb-4">ניסיון אמיתי</h3>
               <p className="text-gray-700">
                 כל דבר שמלמדתי אני עשיתי בעצמי בעבודה. לא תיאוריה - פרקטיקה שעובדת בבן.
               </p>
@@ -213,7 +215,7 @@ export default function Home() {
                 >
                   <ChevronDown
                     size={20}
-                    className={`text-brand-pink transition-transform ${openAccordion === index ? 'rotate-180' : ''}`}
+                    className={`text-brand-navy transition-transform ${openAccordion === index ? 'rotate-180' : ''}`}
                   />
                   <h3 className="text-lg font-semibold text-gray-900">{item.question}</h3>
                 </button>
@@ -230,7 +232,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="cta" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-pink via-pink-400 to-brand-rose">
+      <section id="cta" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-navy via-brand-light-blue to-brand-brown">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-white mb-8 text-center">
             התחילי את הקורס שלך עכשיו
@@ -245,7 +247,7 @@ export default function Home() {
                 value={formData.name}
                 onChange={handleFormChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-pink focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-navy focus:border-transparent outline-none transition"
                 placeholder="שם שלך"
               />
             </div>
@@ -258,7 +260,7 @@ export default function Home() {
                 value={formData.email}
                 onChange={handleFormChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-pink focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-navy focus:border-transparent outline-none transition"
                 placeholder="your@email.com"
               />
             </div>
@@ -270,14 +272,14 @@ export default function Home() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleFormChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-pink focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-navy focus:border-transparent outline-none transition"
                 placeholder="0501234567"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-brand-pink text-white font-bold text-lg rounded-lg hover:bg-brand-rose transition transform hover:scale-105"
+              className="w-full px-6 py-3 bg-brand-navy text-white font-bold text-lg rounded-lg hover:bg-brand-brown transition transform hover:scale-105"
             >
               שלחי את הבקשה שלי
             </button>
@@ -294,7 +296,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">Nail Artistry</h3>
+              <h3 className="text-xl font-bold mb-4 text-brand-light-blue">NIKOLiL</h3>
               <p className="text-gray-400">קורס ציפורניים מקצועי עם ניקול איליבסקי</p>
             </div>
 
@@ -316,7 +318,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2026 Nail Artistry. כל הזכויות שמורות.</p>
+            <p>&copy; 2026 NIKOLiL. כל הזכויות שמורות.</p>
           </div>
         </div>
       </footer>
