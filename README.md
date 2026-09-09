@@ -54,4 +54,3 @@ npm run dev
 ---
 
 **עברית מלאה (RTL) + Responsive Mobile-First**
-\n✨ Landing Page Ready\n
