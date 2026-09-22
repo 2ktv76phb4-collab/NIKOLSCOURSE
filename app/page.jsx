@@ -374,20 +374,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-
-        {/* Image - below text, centered and adaptive */}
-        <div
-          className="w-full md:w-1/2 max-w-xs md:max-w-lg aspect-auto"
-          style={{
-            backgroundImage: 'url(/images/nicole-hero.jpg)',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            minHeight: '280px',
-            ['@media (min-width: 768px)']: { minHeight: '500px' },
-            borderRadius: '16px',
-          }}
-        />
       </section>
 
       {/* Philosophy Band */}
