@@ -331,22 +331,34 @@ export default function Home() {
       {/* Hero */}
       <section
         id="hero"
-        className="min-h-screen flex flex-col pt-24 px-[6.4%]"
+        className="min-h-screen flex flex-col pt-24 px-[6.4%] relative overflow-hidden"
         style={{ backgroundColor: 'var(--cream)' }}
       >
-        <div className="flex-1 flex flex-col gap-9">
-          <div className="text-center">
+        {/* Background Image - Right side (RTL friendly) */}
+        <div
+          className="absolute inset-y-0 -right-20 w-1/2 md:w-1/3 opacity-80"
+          style={{
+            backgroundImage: 'url(/images/nicole-hero.png)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div className="flex-1 flex flex-col gap-9 relative z-10">
+          <div className="text-center md:text-right md:max-w-2xl">
             <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
             <h1 className="text-5xl md:text-7xl font-serif mt-4" style={{ color: 'var(--navy)' }}>
               {CONTENT.hero.title}
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto" style={{ color: 'var(--navy-soft)' }}>
+            <p className="mt-4" style={{ color: 'var(--navy-soft)' }}>
               {CONTENT.hero.subtitle}
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex gap-3 flex-wrap justify-center">
+          <div className="flex gap-3 flex-wrap md:justify-start justify-center">
             <button
               onClick={() => scrollToSection(CONTENT.hero.ctaPrimary.href.replace('#', ''))}
               className="px-7 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5"
