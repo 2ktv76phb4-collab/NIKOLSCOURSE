@@ -242,6 +242,7 @@ export default function Home() {
   const [expandedBonus, setExpandedBonus] = useState(null);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -249,6 +250,13 @@ export default function Home() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const scrollToSection = (sectionId) => {
@@ -329,14 +337,14 @@ export default function Home() {
       {/* Hero */}
       <section
         id="hero"
-        className="py-24 px-[6.4%] flex flex-col items-center gap-12"
+        className="py-12 md:py-24 px-[6.4%] flex flex-col items-center gap-6 md:gap-12"
         style={{ backgroundColor: 'var(--cream)' }}
       >
         {/* Content - centered */}
         <div className="flex flex-col gap-9 max-w-2xl text-center">
           <div>
             <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
-            <h1 className="text-5xl md:text-6xl font-serif mt-4" style={{ color: 'var(--navy)' }}>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif mt-4" style={{ color: 'var(--navy)' }}>
               {CONTENT.hero.title}
             </h1>
             <p className="mt-4" style={{ color: 'var(--navy-soft)' }}>
@@ -369,14 +377,14 @@ export default function Home() {
 
         {/* Image - below text, centered and adaptive */}
         <div
-          className="w-full md:w-1/2 max-w-md md:max-w-lg aspect-auto"
+          className="w-full md:w-1/2 max-w-xs md:max-w-lg aspect-auto"
           style={{
             backgroundImage: 'url(/images/nicole-hero.jpg)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            minHeight: '400px',
-            md: { minHeight: '500px' },
+            minHeight: '280px',
+            ['@media (min-width: 768px)']: { minHeight: '500px' },
             borderRadius: '16px',
           }}
         />
@@ -384,7 +392,7 @@ export default function Home() {
 
       {/* Philosophy Band */}
       <section
-        className="py-20 text-center px-[6.4%]"
+        className="py-12 md:py-20 text-center px-[6.4%]"
         style={{ backgroundColor: 'var(--cream)', color: 'var(--navy)' }}
       >
         <p
@@ -397,7 +405,7 @@ export default function Home() {
       {/* About */}
       <section
         id="about"
-        className="py-24 px-[6.4%]"
+        className="py-12 md:py-24 px-[6.4%]"
         style={{ backgroundColor: 'var(--white)' }}
       >
         <div className="max-w-3xl">
@@ -412,7 +420,7 @@ export default function Home() {
       </section>
 
       {/* Values */}
-      <section id="values" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
+      <section id="values" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
         <span className="eyebrow">{CONTENT.values.eyebrow}</span>
         <h2 className="title">{CONTENT.values.title}</h2>
         <p className="lede">{CONTENT.values.lede}</p>
@@ -437,7 +445,7 @@ export default function Home() {
       </section>
 
       {/* Audience */}
-      <section id="audience" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
+      <section id="audience" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
         <span className="eyebrow">{CONTENT.audience.eyebrow}</span>
         <h2 className="title">{CONTENT.audience.title}</h2>
 
@@ -466,7 +474,7 @@ export default function Home() {
       {/* Transformation */}
       <section
         id="transform"
-        className="py-24 px-[6.4%] text-center"
+        className="py-12 md:py-24 px-[6.4%] text-center"
         style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}
       >
         <span className="eyebrow" style={{ color: 'var(--skyblue)' }}>
@@ -521,7 +529,7 @@ export default function Home() {
       </section>
 
       {/* Why Section */}
-      <section id="why" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
+      <section id="why" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
         <span className="eyebrow">{CONTENT.why.eyebrow}</span>
         <h2 className="title">{CONTENT.why.title}</h2>
 
@@ -552,7 +560,7 @@ export default function Home() {
       </section>
 
       {/* Structure */}
-      <section id="structure" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
+      <section id="structure" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
         <span className="eyebrow">{CONTENT.structure.eyebrow}</span>
         <h2 className="title">{CONTENT.structure.title}</h2>
 
@@ -581,7 +589,7 @@ export default function Home() {
       </section>
 
       {/* Curriculum */}
-      <section id="curriculum" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
+      <section id="curriculum" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
         <span className="eyebrow">{CONTENT.curriculum.eyebrow}</span>
         <h2 className="title">{CONTENT.curriculum.title}</h2>
         <p className="lede">{CONTENT.curriculum.lede}</p>
@@ -633,7 +641,7 @@ export default function Home() {
       </section>
 
       {/* Receive */}
-      <section id="receive" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
+      <section id="receive" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
         <span className="eyebrow">{CONTENT.receive.eyebrow}</span>
         <h2 className="title">{CONTENT.receive.title}</h2>
 
@@ -652,7 +660,7 @@ export default function Home() {
       </section>
 
       {/* Bonuses */}
-      <section id="bonuses" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
+      <section id="bonuses" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
         <span className="eyebrow">{CONTENT.bonuses.eyebrow}</span>
         <h2 className="title">{CONTENT.bonuses.title}</h2>
 
@@ -698,7 +706,7 @@ export default function Home() {
       </section>
 
       {/* Workbook */}
-      <section id="workbook" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}>
+      <section id="workbook" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}>
         <span className="eyebrow" style={{ color: 'var(--skyblue)' }}>
           {CONTENT.workbook.eyebrow}
         </span>
@@ -711,7 +719,7 @@ export default function Home() {
       </section>
 
       {/* Support */}
-      <section id="support" className="py-24 px-[6.4%] text-center relative overflow-hidden" style={{ backgroundColor: 'var(--skyblue)' }}>
+      <section id="support" className="py-12 md:py-24 px-[6.4%] text-center relative overflow-hidden" style={{ backgroundColor: 'var(--skyblue)' }}>
         {/* Background image with opacity overlay */}
         <div
           style={{
@@ -723,7 +731,7 @@ export default function Home() {
             backgroundImage: 'url(/images/nicole-hero.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.35,
+            opacity: isMobile ? 0.15 : 0.35,
             zIndex: 0,
           }}
         />
@@ -768,7 +776,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
+      <section id="faq" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
         <span className="eyebrow">{CONTENT.faq.eyebrow}</span>
         <h2 className="title">{CONTENT.faq.title}</h2>
         <p className="lede mt-4">{CONTENT.faq.intro}</p>
@@ -805,7 +813,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="cta" className="py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--cream)' }}>
+      <section id="cta" className="py-12 md:py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--cream)' }}>
         <span className="eyebrow" style={{ color: 'var(--taupe)' }}>ההרשמה למחזור הקרוב</span>
         <h2 className="title mt-3">בינך לבין החלום הגדול מפריד צעד אחד קטן בלבד</h2>
         <p className="lede mt-6">להרשמה והצטרפות למחזור הקרוב, תשאירי פרטים:</p>
@@ -873,7 +881,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-[6.4%] border-t" style={{ backgroundColor: 'var(--white)', borderTopColor: 'var(--line)' }}>
+      <footer className="py-6 md:py-8 px-[6.4%] border-t" style={{ backgroundColor: 'var(--white)', borderTopColor: 'var(--line)' }}>
         <div className="flex flex-col md:flex-row gap-8 mb-6">
           <div className="flex-1">
             <span style={{ fontSize: '1.5rem' }}>ניקול</span>
