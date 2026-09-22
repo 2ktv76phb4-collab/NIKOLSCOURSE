@@ -8,7 +8,7 @@ export default function Logo({ size = 'small' }) {
   return (
     <div className={`flex items-center justify-start transition-transform duration-300 hover:opacity-80 ${sizeClasses[size]}`}>
       <img
-        src="/images/logo-simplified.jpg"
+        src="/images/logo-simplified.png"
         alt="NIKOLiL - Crafting pearls of nails masters"
         className="w-full h-full object-contain"
       />
