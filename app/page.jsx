@@ -234,6 +234,8 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMeeting, setExpandedMeeting] = useState(null);
   const [expandedFAQ, setExpandedFAQ] = useState(null);
+  const [expandedWhyCard, setExpandedWhyCard] = useState(null);
+  const [expandedBonus, setExpandedBonus] = useState(null);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
@@ -374,10 +376,11 @@ export default function Home() {
       {/* Philosophy Band */}
       <section
         className="py-20 text-center px-[6.4%]"
-        style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}
+        style={{ backgroundColor: 'var(--cream)', color: 'var(--navy)' }}
       >
         <p
-          className="text-2xl md:text-4xl font-serif max-w-sm mx-auto leading-relaxed"
+          className="text-2xl md:text-4xl font-serif max-w-sm mx-auto leading-relaxed reveal in"
+          style={{ animationDelay: '0.2s' }}
           dangerouslySetInnerHTML={{ __html: CONTENT.philosophy }}
         />
       </section>
@@ -429,8 +432,11 @@ export default function Home() {
           {CONTENT.audience.items.map((item, i) => (
             <div
               key={i}
-              className="flex gap-3 py-3 border-t"
-              style={{ borderTopColor: 'var(--line-soft)' }}
+              className="flex gap-3 py-3 border-t reveal in"
+              style={{
+                borderTopColor: 'var(--line-soft)',
+                animationDelay: `${0.1 * (i + 1)}s`
+              }}
             >
               <span style={{ color: 'var(--navy)' }}>✓</span>
               <span style={{ color: 'var(--navy-soft)' }}>{item}</span>
@@ -452,15 +458,26 @@ export default function Home() {
           {CONTENT.transform.title}
         </h2>
 
-        <div className="mt-16 flex flex-col md:flex-row gap-8 max-w-4xl mx-auto justify-center">
-          <div className="flex-1">
+        <div className="mt-16 flex flex-col md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
+          <div className="flex-1 reveal in" style={{ animationDelay: '0.2s' }}>
+            <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-serif" style={{ backgroundColor: 'var(--skyblue)', color: 'var(--navy)' }}>
+              0
+            </div>
             <h3 className="font-serif text-xl mb-4">{CONTENT.transform.start.heading}</h3>
             <p style={{ color: 'rgba(255, 249, 239, 0.75)' }}>{CONTENT.transform.start.text}</p>
           </div>
 
-          <div className="w-1 hidden md:block" style={{ backgroundColor: 'var(--skyblue)' }}></div>
+          <div className="hidden md:flex flex-col items-center gap-2">
+            <svg width="40" height="60" viewBox="0 0 40 60" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '2' }}>
+              <path d="M 20 0 Q 30 15, 20 30" />
+              <polygon points="20,35 16,28 24,28" fill="var(--skyblue)" />
+            </svg>
+          </div>
 
-          <div className="flex-1">
+          <div className="flex-1 reveal in" style={{ animationDelay: '0.4s' }}>
+            <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-serif" style={{ backgroundColor: 'var(--skyblue)', color: 'var(--navy)' }}>
+              ✓
+            </div>
             <h3 className="font-serif text-xl mb-4">{CONTENT.transform.end.heading}</h3>
             <p style={{ color: 'rgba(255, 249, 239, 0.75)' }}>{CONTENT.transform.end.text}</p>
           </div>
@@ -474,14 +491,25 @@ export default function Home() {
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {CONTENT.why.items.map((card, i) => (
-            <div key={i} className="p-6 border" style={{ borderColor: 'var(--line)' }}>
+            <button
+              key={i}
+              onClick={() => setExpandedWhyCard(expandedWhyCard === i ? null : i)}
+              className="p-6 border text-left transition-all duration-300 reveal in hover:shadow-md"
+              style={{
+                borderColor: expandedWhyCard === i ? 'var(--navy)' : 'var(--line)',
+                backgroundColor: expandedWhyCard === i ? 'var(--skyblue)' : 'transparent',
+                animationDelay: `${0.1 * (i + 1)}s`
+              }}
+            >
               <h3 className="font-serif text-base mb-3" style={{ color: 'var(--navy)' }}>
                 {card.title}
               </h3>
-              <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
-                {card.text}
-              </p>
-            </div>
+              {(expandedWhyCard === i || window.innerWidth >= 1024) && (
+                <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
+                  {card.text}
+                </p>
+              )}
+            </button>
           ))}
         </div>
       </section>
@@ -518,45 +546,40 @@ export default function Home() {
         <h2 className="title">{CONTENT.curriculum.title}</h2>
         <p className="lede">{CONTENT.curriculum.lede}</p>
 
-        <div className="mt-8 space-y-0">
+        <div className="mt-8 flex flex-wrap gap-4 justify-start mb-8">
           {CONTENT.curriculum.meetings.map((meeting, i) => (
-            <div key={i} className="border-t" style={{ borderTopColor: 'var(--line-soft)' }}>
-              <button
-                onClick={() => setExpandedMeeting(expandedMeeting === i ? null : i)}
-                className="w-full flex items-center justify-between py-4 hover:opacity-75 transition text-left"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="font-serif italic text-xl" style={{ color: 'var(--taupe)' }}>
-                    {meeting.num}
-                  </span>
-                  <h3 className="font-serif text-lg">{meeting.title}</h3>
-                </div>
-                <span
-                  style={{
-                    color: 'var(--taupe)',
-                    transform: expandedMeeting === i ? 'rotate(135deg)' : 'rotate(0)',
-                    transition: 'transform 0.3s ease',
-                  }}
-                >
-                  +
-                </span>
-              </button>
-
-              {expandedMeeting === i && (
-                <div className="pb-4 pl-20 space-y-2 max-h-96 overflow-hidden">
-                  {meeting.items.map((item, j) => (
-                    <div key={j} className="flex gap-3">
-                      <span style={{ color: 'var(--taupe)' }}>—</span>
-                      <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            <button
+              key={i}
+              onClick={() => setExpandedMeeting(expandedMeeting === i ? null : i)}
+              className="w-16 h-16 rounded-full font-serif text-lg flex items-center justify-center transition-all duration-300"
+              style={{
+                backgroundColor: expandedMeeting === i ? 'var(--navy)' : 'var(--skyblue)',
+                color: expandedMeeting === i ? 'var(--cream)' : 'var(--navy)',
+                border: expandedMeeting === i ? `2px solid var(--navy)` : `2px solid var(--skyblue)`,
+              }}
+            >
+              {meeting.num}
+            </button>
           ))}
         </div>
+
+        {expandedMeeting !== null && (
+          <div className="mt-8 p-6 border reveal in" style={{ borderColor: 'var(--line)' }}>
+            <h3 className="font-serif text-xl mb-4" style={{ color: 'var(--navy)' }}>
+              {CONTENT.curriculum.meetings[expandedMeeting].title}
+            </h3>
+            <div className="space-y-3">
+              {CONTENT.curriculum.meetings[expandedMeeting].items.map((item, j) => (
+                <div key={j} className="flex gap-3">
+                  <span style={{ color: 'var(--taupe)', flexShrink: 0 }}>—</span>
+                  <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Receive */}
@@ -583,27 +606,43 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.bonuses.eyebrow}</span>
         <h2 className="title">{CONTENT.bonuses.title}</h2>
 
-        <div className="mt-10 grid grid-cols-1 gap-6">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CONTENT.bonuses.items.map((bonus, i) => (
-            <div key={i} className="border p-6" style={{ borderColor: 'var(--line)' }}>
-              <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: 'var(--taupe)' }}></div>
-              <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
-                {bonus.title}
-              </h3>
-              <p className="text-sm mb-3" style={{ color: 'var(--navy-soft)' }}>
-                {bonus.intro}
-              </p>
-              {bonus.items.length > 0 && (
-                <ul className="space-y-2">
-                  {bonus.items.map((item, j) => (
-                    <li key={j} className="flex gap-3 text-sm" style={{ color: 'var(--navy-soft)' }}>
-                      <span style={{ color: 'var(--taupe)' }}>—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+            <button
+              key={i}
+              onClick={() => setExpandedBonus(expandedBonus === i ? null : i)}
+              className="p-6 rounded-3xl border-2 transition-all duration-300 text-left reveal in hover:shadow-lg"
+              style={{
+                borderColor: expandedBonus === i ? 'var(--navy)' : 'var(--line)',
+                backgroundColor: expandedBonus === i ? 'var(--skyblue)' : 'transparent',
+                animationDelay: `${0.1 * (i + 1)}s`
+              }}
+            >
+              <div className="flex items-start gap-3">
+                <div className="w-3 h-3 rounded-full mt-1 flex-shrink-0" style={{ backgroundColor: 'var(--taupe)' }}></div>
+                <h3 className="font-serif text-lg" style={{ color: 'var(--navy)' }}>
+                  {bonus.title}
+                </h3>
+              </div>
+
+              {expandedBonus === i && (
+                <div className="mt-4">
+                  <p className="text-sm mb-3" style={{ color: 'var(--navy-soft)' }}>
+                    {bonus.intro}
+                  </p>
+                  {bonus.items.length > 0 && (
+                    <ul className="space-y-2">
+                      {bonus.items.map((item, j) => (
+                        <li key={j} className="flex gap-3 text-sm" style={{ color: 'var(--navy-soft)' }}>
+                          <span style={{ color: 'var(--taupe)', flexShrink: 0 }}>—</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               )}
-            </div>
+            </button>
           ))}
         </div>
       </section>
