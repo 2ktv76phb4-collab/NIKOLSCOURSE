@@ -38,8 +38,8 @@ const CONTENT = {
 
   values: {
     eyebrow: `הפילוסופיה המקצועית שלי`,
-    title: `לא לחקות תנועות — להבין מקצוע`,
-    lede: `התלמידות שלי לא לומדות לחקות תנועות באופן מכני. הן לומדות להבין מה הן עושות, ולמה.`,
+    title: `בונות מקצוע שגאים בו`,
+    lede: `לא רק לומדות לעשות ציפורניים`,
     items: [
       `בסיס לפני הכל`,
       `להבין, לא לשנן`,
@@ -63,7 +63,8 @@ const CONTENT = {
 
   transform: {
     eyebrow: `התהליך שאת הולכת לעבור`,
-    title: `0 ידע → בעלת מקצוע`,
+    title: `0 ידע`,
+    end_title: `בעלת מקצוע`,
     start: {
       heading: `נקודת ההתחלה`,
       text: `את יכולה להגיע ללא שום ניסיון קודם - בלי לדעת איך לגשת לציפורן, איך לבחור את החומרים הנכונים, מהו תהליך העבודה הנכון, או איך כל חלקי המקצוע מתחברים יחד.`,
@@ -82,6 +83,7 @@ const CONTENT = {
       { title: `הבנה, לא חיקוי`, text: `המטרה שלי היא שתביני את המקצוע ותדעי למה את מבצעת כל שלב - לא רק להעתיק תנועות.` },
       { title: `סטנדרט מקצועי גבוה`, text: `הבסיס הוא הכל. אני רוצה שתבני הרגלים מקצועיים נכונים כבר מההתחלה.` },
       { title: `אני נשארת איתך`, text: `הליווי שלי לא נעלם כשנגמר המפגש האחרון.` },
+      { title: `ליווי אישי בקורס ולאחריו`, text: `אני כאן עבורך במהלך כל הדרך ולא מפסיקה בסיום.` },
     ],
   },
 
@@ -91,11 +93,12 @@ const CONTENT = {
     format: `1:1 , קורס זוגי`,
     items: [
       { k: `מספר מפגשים`, v: `4 מפגשים` },
-      { k: `אורך מפגש`, v: `בין 5-6 שעות` },
-      { k: `סה"כ שעות לימוד`, v: `24 שעות לימוד` },
+      { k: `אורך כל מפגש`, v: `בין 5-6 שעות` },
       { k: `משך הקורס`, v: `חודש במתכונת של מפגש אחד לשבוע` },
-      { k: `מסלול בוקר`, v: `09:00–15:00` },
-      { k: `מסלול ערב`, v: `15:00–21:00` },
+    ],
+    schedules: [
+      { type: `מסלול בוקר`, time: `09:00–15:00` },
+      { type: `מסלול ערב`, time: `15:00–21:00` },
     ],
   },
 
@@ -155,7 +158,7 @@ const CONTENT = {
       `4 מפגשים פרונטליים מלאים - סה"כ 24 שעות לימוד`,
       `למידה בפורמט 1:1 או זוגי`,
       `תעודת סיום קורס מקצועית`,
-      `ליווי אישי במהלך הקורס וכמובן לאחריו`,
+      `ליווי אישי שלי במהלך הקורס וכמובן לאחריו`,
       `5 בונוסים מקצועיים`,
       `חוברת מקצועית שתלווה אותך בתחילת דרכך ובצעדים הראשונים שלך בעולם הציפורניים`,
     ],
@@ -208,7 +211,7 @@ const CONTENT = {
   workbook: {
     eyebrow: `משאב מקצועי`,
     title: `החוברת המקצועית שלי`,
-    text: `בנוסף לזה את מקבלת גם חוברת שהולכת לעבור לתנך המקצועי שלך בתחילת דרכך והולכת ללוות אותך במהלך הקורס וכמובן לאחריו בתחילת דרכך ובצעדים הראשונים שלך בעולם הציפורניים.`,
+    text: `את מקבלת חוברת שהולכת לעבור לתנך המקצועי שלך בתחילת דרכך והולכת ללוות אותך בצעדים הראשונים שלך בעולם הציפורניים.`,
   },
 
   support: {
@@ -220,12 +223,13 @@ const CONTENT = {
   faq: {
     eyebrow: `שאלות נפוצות`,
     title: `כל מה שרציתן לשאול`,
+    intro: `ולמקרה שנשארו לך שאלות נוספות...`,
     items: [
       { q: `האם אני צריכה ניסיון קודם?`, a: `לא. הקורס מיועד למתחילות מ-0, ללא כל ידע או ניסיון קודם.` },
       { q: `הקורס הוא קבוצתי או אישי?`, a: `הקורס מתקיים בליווי אישי - 1:1, או במתכונת זוגית.` },
       { q: `האם מקבלים ערכה?`, a: `לא, אבל את מקבלת ממני רשימה מסודרת של כל הציוד המקצועי שאת תצטרכי לרכוש. למה אני לא עושה ערכה? כי אני מאמינה שערכות היום הן זולות ולא איכותיות ואני רוצה לכוון אותך לאיזה מכונות לקנות ומה חשוב לשים לב אליו כשקונים.` },
-      { q: `מתי אני צריכה לרכוש את הציוד?`, a: `בין השיעור הראשון לשני. לשיעור השני את צריכה כבר להגיע עם כל הציוד כי חשוב לי מהשיעור השני המעשי ללמד אותך על המכשור שאת הולכת לעבוד איתו עם לקוחות שהיד שלך תתרגל לזה, ולא למוצרים שלי.` },
-      { q: `תוך כמה זמן אני יכולה להתחיל לקבל לקוחות?`, a: `מסיום הקורס את עוברת הכשרה מקיפה, שבאותו יום שאת מסיימת את הקורס את יכולה להתחיל לגבות תשלום על העבודות שלך.` },
+      { q: `מתי התלמידה צריכה לרכוש את הציוד?`, a: `בין השיעור הראשון לשני. לשיעור השני היא צריכה כבר להגיע עם כל הציוד כי חשוב לי מהשיעור השני המעשי ללמד אותה על המכשור שהיא הולכת לעבוד איתו עם לקוחות שהיד שלה תתרגל לזה, ולא למוצרים שלי.` },
+      { q: `תוך כמה זמן אני יכולה להתחיל לקבל לקוחות?`, a: `מסיום הקורס את עוברת הכשרה מקיפה, שבאותו היום שאת מסיימת את הקורס את יכולה להתחיל לגבות תשלום על העבודות שלך.` },
     ],
   },
 };
@@ -276,8 +280,9 @@ export default function Home() {
         }}
       >
         <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span style={{ fontSize: '1.5rem' }}>ניקול</span>
+          <div className="flex flex-col items-start gap-0">
+            <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>ניקול</span>
+            <span style={{ fontSize: '0.7rem', color: 'var(--taupe)', letterSpacing: '0.05em' }}>Creating pearls of nail masters</span>
           </div>
 
           {/* Desktop Nav */}
@@ -349,7 +354,11 @@ export default function Home() {
               {CONTENT.hero.ctaPrimary.label}
             </button>
             <button
-              onClick={() => scrollToSection(CONTENT.hero.ctaSecondary.href.replace('#', ''))}
+              onClick={() => {
+                const message = encodeURIComponent('שלום ניקול! אני מעוניינת ללמוד בקורס של לק ג\'ל ומבנה אנטומי. אשמח לפרטים!');
+                const phone = '972501234567';
+                window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+              }}
               className="px-7 py-3 text-sm font-medium border transition-colors hover:border-opacity-100"
               style={{ borderColor: 'var(--line)', color: 'var(--navy)' }}
             >
@@ -408,12 +417,16 @@ export default function Home() {
         <h2 className="title">{CONTENT.values.title}</h2>
         <p className="lede">{CONTENT.values.lede}</p>
 
-        <div className="mt-10 space-y-0">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
           {CONTENT.values.items.map((item, i) => (
             <div
               key={i}
-              className="py-4 px-4 border-t"
-              style={{ borderTopColor: 'rgba(20, 44, 74, 0.16)' }}
+              className="p-6 border-2 rounded-lg reveal in"
+              style={{
+                borderColor: 'rgba(20, 44, 74, 0.2)',
+                backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                animationDelay: `${0.1 * (i + 1)}s`
+              }}
             >
               <h3 className="font-serif text-lg" style={{ color: 'var(--navy)' }}>
                 {item}
@@ -428,20 +441,25 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.audience.eyebrow}</span>
         <h2 className="title">{CONTENT.audience.title}</h2>
 
-        <div className="mt-10 space-y-0">
-          {CONTENT.audience.items.map((item, i) => (
-            <div
-              key={i}
-              className="flex gap-3 py-3 border-t reveal in"
-              style={{
-                borderTopColor: 'var(--line-soft)',
-                animationDelay: `${0.1 * (i + 1)}s`
-              }}
-            >
-              <span style={{ color: 'var(--navy)' }}>✓</span>
-              <span style={{ color: 'var(--navy-soft)' }}>{item}</span>
-            </div>
-          ))}
+        <div className="mt-10 space-y-3">
+          {CONTENT.audience.items.map((item, i) => {
+            const colors = ['var(--navy)', 'var(--taupe)', 'var(--skyblue)', 'var(--navy)', 'var(--taupe)', 'var(--skyblue)'];
+            const bgColors = ['rgba(218, 232, 246, 0.5)', 'rgba(133, 100, 78, 0.1)', 'rgba(20, 44, 74, 0.05)', 'rgba(218, 232, 246, 0.5)', 'rgba(133, 100, 78, 0.1)', 'rgba(20, 44, 74, 0.05)'];
+            return (
+              <div
+                key={i}
+                className="flex gap-3 py-4 px-4 border-l-4 rounded reveal in"
+                style={{
+                  borderLeftColor: colors[i % colors.length],
+                  backgroundColor: bgColors[i % bgColors.length],
+                  animationDelay: `${0.1 * (i + 1)}s`
+                }}
+              >
+                <span style={{ color: colors[i % colors.length], flexShrink: 0 }}>✓</span>
+                <span style={{ color: 'var(--navy-soft)' }}>{item}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -455,31 +473,49 @@ export default function Home() {
           {CONTENT.transform.eyebrow}
         </span>
         <h2 className="title" style={{ color: 'var(--cream)' }}>
-          {CONTENT.transform.title}
+          <span className="reveal in" style={{ display: 'inline-block', animationDelay: '0.2s' }}>
+            {CONTENT.transform.title}
+          </span>
+          <span className="mx-3" style={{ color: 'var(--skyblue)' }}>↓</span>
+          <span className="reveal in" style={{ display: 'inline-block', animationDelay: '0.4s' }}>
+            {CONTENT.transform.end_title}
+          </span>
         </h2>
 
         <div className="mt-16 flex flex-col md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
-          <div className="flex-1 reveal in" style={{ animationDelay: '0.2s' }}>
-            <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-serif" style={{ backgroundColor: 'var(--skyblue)', color: 'var(--navy)' }}>
+          <div className="flex-1 reveal in" style={{ animationDelay: '0.3s' }}>
+            <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-serif border-2" style={{ backgroundColor: 'transparent', borderColor: 'var(--skyblue)', color: 'var(--skyblue)' }}>
               0
             </div>
             <h3 className="font-serif text-xl mb-4">{CONTENT.transform.start.heading}</h3>
-            <p style={{ color: 'rgba(255, 249, 239, 0.75)' }}>{CONTENT.transform.start.text}</p>
+            <p style={{ color: 'rgba(255, 249, 239, 0.75)', fontSize: '0.9rem' }}>{CONTENT.transform.start.text}</p>
           </div>
 
-          <div className="hidden md:flex flex-col items-center gap-2">
-            <svg width="40" height="60" viewBox="0 0 40 60" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '2' }}>
-              <path d="M 20 0 Q 30 15, 20 30" />
-              <polygon points="20,35 16,28 24,28" fill="var(--skyblue)" />
+          <div className="hidden md:flex flex-col items-center gap-2 md:gap-8">
+            <svg width="60" height="120" viewBox="0 0 60 120" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '3' }}>
+              <path d="M 30 0 Q 50 30, 40 60 Q 20 90, 30 120" strokeDasharray="200" strokeDashoffset="0" style={{ animation: 'flow 3s ease-in-out infinite' }} />
+              <circle cx="30" cy="60" r="4" fill="var(--skyblue)" style={{ animation: 'moveDot 3s ease-in-out infinite' }} />
+              <polygon points="30,125 26,115 34,115" fill="var(--skyblue)" />
             </svg>
+            <style>{`
+              @keyframes flow {
+                0% { stroke-dashoffset: 200; }
+                100% { stroke-dashoffset: 0; }
+              }
+              @keyframes moveDot {
+                0% { cy: 10; }
+                50% { cy: 60; }
+                100% { cy: 120; }
+              }
+            `}</style>
           </div>
 
-          <div className="flex-1 reveal in" style={{ animationDelay: '0.4s' }}>
-            <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-serif" style={{ backgroundColor: 'var(--skyblue)', color: 'var(--navy)' }}>
+          <div className="flex-1 reveal in" style={{ animationDelay: '0.5s' }}>
+            <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-serif border-2" style={{ backgroundColor: 'transparent', borderColor: 'var(--skyblue)', color: 'var(--skyblue)' }}>
               ✓
             </div>
             <h3 className="font-serif text-xl mb-4">{CONTENT.transform.end.heading}</h3>
-            <p style={{ color: 'rgba(255, 249, 239, 0.75)' }}>{CONTENT.transform.end.text}</p>
+            <p style={{ color: 'rgba(255, 249, 239, 0.75)', fontSize: '0.9rem' }}>{CONTENT.transform.end.text}</p>
           </div>
         </div>
       </section>
@@ -489,23 +525,24 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.why.eyebrow}</span>
         <h2 className="title">{CONTENT.why.title}</h2>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {CONTENT.why.items.map((card, i) => (
             <button
               key={i}
               onClick={() => setExpandedWhyCard(expandedWhyCard === i ? null : i)}
-              className="p-6 border text-left transition-all duration-300 reveal in hover:shadow-md"
+              className="p-6 rounded-2xl text-left transition-all duration-300 reveal in hover:shadow-lg border-2 cursor-pointer"
               style={{
-                borderColor: expandedWhyCard === i ? 'var(--navy)' : 'var(--line)',
-                backgroundColor: expandedWhyCard === i ? 'var(--skyblue)' : 'transparent',
-                animationDelay: `${0.1 * (i + 1)}s`
+                borderColor: expandedWhyCard === i ? 'var(--navy)' : 'var(--line-soft)',
+                backgroundColor: expandedWhyCard === i ? 'var(--skyblue)' : 'var(--white)',
+                animationDelay: `${0.1 * (i + 1)}s`,
+                minHeight: expandedWhyCard === i ? 'auto' : '100px',
               }}
             >
-              <h3 className="font-serif text-base mb-3" style={{ color: 'var(--navy)' }}>
+              <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)', textAlign: 'center' }}>
                 {card.title}
               </h3>
-              {(expandedWhyCard === i || window.innerWidth >= 1024) && (
-                <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
+              {expandedWhyCard === i && (
+                <p className="text-sm mt-4 text-center" style={{ color: 'var(--navy-soft)' }}>
                   {card.text}
                 </p>
               )}
@@ -519,7 +556,7 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.structure.eyebrow}</span>
         <h2 className="title">{CONTENT.structure.title}</h2>
 
-        <div className="mt-8 space-y-1">
+        <div className="mt-8 space-y-0">
           {CONTENT.structure.items.map((item, i) => (
             <div key={i} className="flex justify-between py-4 border-t" style={{ borderTopColor: 'rgba(20, 44, 74, 0.1)' }}>
               <span className="text-sm" style={{ color: 'var(--navy-soft)' }}>
@@ -530,13 +567,16 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="mt-8 pt-8 border-t" style={{ borderTopColor: 'rgba(20, 44, 74, 0.16)' }}>
-          <h3 className="font-serif text-lg mb-3">{CONTENT.structure.location.heading}</h3>
-          {CONTENT.structure.location.lines.map((line, i) => (
-            <p key={i} className="text-sm" style={{ color: 'var(--navy-soft)' }}>
-              {line}
-            </p>
-          ))}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>סוגי מסלולים</h3>
+            {CONTENT.structure.schedules.map((schedule, i) => (
+              <div key={i} className="py-3 px-4 rounded mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
+                <p className="font-serif text-sm" style={{ color: 'var(--navy)' }}>{schedule.type}</p>
+                <p className="text-xs" style={{ color: 'var(--navy-soft)' }}>{schedule.time}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -546,19 +586,29 @@ export default function Home() {
         <h2 className="title">{CONTENT.curriculum.title}</h2>
         <p className="lede">{CONTENT.curriculum.lede}</p>
 
-        <div className="mt-8 flex flex-wrap gap-4 justify-start mb-8">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {CONTENT.curriculum.meetings.map((meeting, i) => (
             <button
               key={i}
               onClick={() => setExpandedMeeting(expandedMeeting === i ? null : i)}
-              className="w-16 h-16 rounded-full font-serif text-lg flex items-center justify-center transition-all duration-300"
+              className="flex flex-col items-center gap-3 p-4 rounded-lg border-2 transition-all duration-300 hover:shadow-md"
               style={{
-                backgroundColor: expandedMeeting === i ? 'var(--navy)' : 'var(--skyblue)',
-                color: expandedMeeting === i ? 'var(--cream)' : 'var(--navy)',
-                border: expandedMeeting === i ? `2px solid var(--navy)` : `2px solid var(--skyblue)`,
+                backgroundColor: expandedMeeting === i ? 'var(--skyblue)' : 'transparent',
+                borderColor: expandedMeeting === i ? 'var(--navy)' : 'var(--line-soft)',
               }}
             >
-              {meeting.num}
+              <div
+                className="w-20 h-20 rounded-full font-serif text-2xl flex items-center justify-center transition-all duration-300"
+                style={{
+                  backgroundColor: expandedMeeting === i ? 'var(--navy)' : 'var(--skyblue)',
+                  color: expandedMeeting === i ? 'var(--cream)' : 'var(--navy)',
+                }}
+              >
+                {meeting.num}
+              </div>
+              <p className="text-xs text-center font-medium" style={{ color: 'var(--navy)', lineHeight: '1.3' }}>
+                {meeting.title}
+              </p>
             </button>
           ))}
         </div>
@@ -663,18 +713,32 @@ export default function Home() {
       {/* Support */}
       <section id="support" className="py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--skyblue)' }}>
         <span className="eyebrow">{CONTENT.support.eyebrow}</span>
-        <h2 className="font-serif text-2xl md:text-4xl mt-3" style={{ color: 'var(--navy)' }}>
+        <h2
+          className="font-serif text-2xl md:text-4xl mt-3 reveal in"
+          style={{
+            color: 'var(--navy)',
+            animationDelay: '0.2s',
+            animation: 'bounce 2s ease-in-out infinite'
+          }}
+        >
           {CONTENT.support.headline}
         </h2>
-        <p className="lede mt-6 mx-auto" style={{ color: 'var(--navy-soft)' }}>
+        <p className="lede mt-6 mx-auto reveal in" style={{ color: 'var(--navy-soft)', animationDelay: '0.3s' }}>
           {CONTENT.support.text}
         </p>
+        <style>{`
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+        `}</style>
       </section>
 
       {/* FAQ */}
       <section id="faq" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
         <span className="eyebrow">{CONTENT.faq.eyebrow}</span>
         <h2 className="title">{CONTENT.faq.title}</h2>
+        <p className="lede mt-4">{CONTENT.faq.intro}</p>
 
         <div className="mt-8 space-y-0">
           {CONTENT.faq.items.map((item, i) => (
@@ -709,8 +773,9 @@ export default function Home() {
 
       {/* CTA Section */}
       <section id="cta" className="py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--cream)' }}>
-        <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
-        <h2 className="title mt-3">הרשמה לקורס</h2>
+        <span className="eyebrow" style={{ color: 'var(--taupe)' }}>ההרשמה למחזור הקרוב</span>
+        <h2 className="title mt-3">בינך לבין החלום הגדול מפריד צעד אחד קטן בלבד</h2>
+        <p className="lede mt-6">להרשמה והצטרפות למחזור הקרוב, תשאירי פרטים:</p>
 
         <div className="mt-10 max-w-md mx-auto space-y-6">
           <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -720,7 +785,7 @@ export default function Home() {
               placeholder="שם מלא"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 border"
+              className="w-full px-4 py-3 border rounded"
               style={{ borderColor: 'var(--line)' }}
               required
             />
@@ -730,7 +795,7 @@ export default function Home() {
               placeholder="דוא״ל"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 border"
+              className="w-full px-4 py-3 border rounded"
               style={{ borderColor: 'var(--line)' }}
               required
             />
@@ -740,16 +805,16 @@ export default function Home() {
               placeholder="טלפון"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-3 border"
+              className="w-full px-4 py-3 border rounded"
               style={{ borderColor: 'var(--line)' }}
               required
             />
             <button
               type="submit"
-              className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5"
+              className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5 rounded"
               style={{ backgroundColor: 'var(--navy)' }}
             >
-              שלח
+              שלח דרך דוא״ל
             </button>
           </form>
 
@@ -761,11 +826,11 @@ export default function Home() {
 
           <button
             onClick={() => {
-              const message = encodeURIComponent('שלום ניקול! אני מעוניינת ללמוד בקורס של לק ג\'ל ומבנה אנטומי. אפשר לשלוח לי פרטים על הקורס?');
+              const message = encodeURIComponent('היי ניקול, עברתי על כל הפרטים ואני מוכנה לעשות את הצעד הבא לרכישת הקורס, אשמח לפרטים הסופיים ממך');
               const phone = '972501234567';
               window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
             }}
-            className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2 rounded"
             style={{ backgroundColor: '#25D366' }}
           >
             <span>💬</span>
