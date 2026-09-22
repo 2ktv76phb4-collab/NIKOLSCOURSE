@@ -711,21 +711,54 @@ export default function Home() {
       </section>
 
       {/* Support */}
-      <section id="support" className="py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--skyblue)' }}>
-        <span className="eyebrow">{CONTENT.support.eyebrow}</span>
-        <h2
-          className="font-serif text-2xl md:text-4xl mt-3 reveal in"
+      <section id="support" className="py-24 px-[6.4%] text-center relative overflow-hidden" style={{ backgroundColor: 'var(--skyblue)' }}>
+        {/* Background image with opacity overlay */}
+        <div
           style={{
-            color: 'var(--navy)',
-            animationDelay: '0.2s',
-            animation: 'bounce 2s ease-in-out infinite'
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: 'url(/images/nicole-hero.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.35,
+            zIndex: 0,
           }}
-        >
-          {CONTENT.support.headline}
-        </h2>
-        <p className="lede mt-6 mx-auto reveal in" style={{ color: 'var(--navy-soft)', animationDelay: '0.3s' }}>
-          {CONTENT.support.text}
-        </p>
+        />
+
+        {/* Cream overlay for better readability */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 249, 239, 0.55)',
+            zIndex: 1,
+          }}
+        />
+
+        {/* Content with z-index */}
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <span className="eyebrow">{CONTENT.support.eyebrow}</span>
+          <h2
+            className="font-serif text-2xl md:text-4xl mt-3 reveal in"
+            style={{
+              color: 'var(--navy)',
+              animationDelay: '0.2s',
+              animation: 'bounce 2s ease-in-out infinite'
+            }}
+          >
+            {CONTENT.support.headline}
+          </h2>
+          <p className="lede mt-6 mx-auto reveal in" style={{ color: 'var(--navy-soft)', animationDelay: '0.3s' }}>
+            {CONTENT.support.text}
+          </p>
+        </div>
+
         <style>{`
           @keyframes bounce {
             0%, 100% { transform: translateY(0); }
