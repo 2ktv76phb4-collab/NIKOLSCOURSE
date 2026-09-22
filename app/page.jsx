@@ -375,6 +375,7 @@ export default function Home() {
             backgroundPosition: 'center',
             minHeight: '400px',
             md: { minHeight: '500px' },
+            borderRadius: '16px',
           }}
         />
       </section>
