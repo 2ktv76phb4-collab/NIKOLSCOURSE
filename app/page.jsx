@@ -364,7 +364,7 @@ export default function Home() {
             <button
               onClick={() => {
                 const message = encodeURIComponent('שלום ניקול! אני מעוניינת ללמוד בקורס של לק ג\'ל ומבנה אנטומי. אשמח לפרטים!');
-                const phone = '972501234567';
+                const phone = '972542090310';
                 window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
               }}
               className="px-7 py-3 text-sm font-medium border transition-colors hover:border-opacity-100"
@@ -372,6 +372,13 @@ export default function Home() {
             >
               {CONTENT.hero.ctaSecondary.label}
             </button>
+          </div>
+
+          <div className="mt-8 pt-8 border-t" style={{ borderTopColor: 'var(--line)', maxWidth: '100%' }}>
+            <p className="text-lg md:text-xl font-serif reveal in" style={{ color: 'var(--navy)', animationDelay: '0.6s' }}>
+              לא רק לומדות לעשות ציפורניים<br />
+              <span style={{ color: 'var(--taupe)' }}>בונות מקצוע שאנחנו גאות בו</span>
+            </p>
           </div>
         </div>
       </section>
@@ -450,7 +457,7 @@ export default function Home() {
                 }}
               >
                 <span style={{ color: colors[i % colors.length], flexShrink: 0 }}>✓</span>
-                <span style={{ color: 'var(--navy-soft)' }}>{item}</span>
+                <span style={{ color: 'var(--navy)' }}>{item}</span>
               </div>
             );
           })}
@@ -476,7 +483,7 @@ export default function Home() {
           </span>
         </h2>
 
-        <div className="mt-16 flex flex-col md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
+        <div className="mt-16 flex flex-col-reverse md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
           <div className="flex-1 reveal in" style={{ animationDelay: '0.3s' }}>
             <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-serif border-2" style={{ backgroundColor: 'transparent', borderColor: 'var(--skyblue)', color: 'var(--skyblue)' }}>
               0
@@ -485,11 +492,11 @@ export default function Home() {
             <p style={{ color: 'rgba(255, 249, 239, 0.75)', fontSize: '0.9rem' }}>{CONTENT.transform.start.text}</p>
           </div>
 
-          <div className="hidden md:flex flex-col items-center gap-2 md:gap-8">
-            <svg width="60" height="120" viewBox="0 0 60 120" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '3' }}>
-              <path d="M 30 0 Q 50 30, 40 60 Q 20 90, 30 120" strokeDasharray="200" strokeDashoffset="0" style={{ animation: 'flow 3s ease-in-out infinite' }} />
-              <circle cx="30" cy="60" r="4" fill="var(--skyblue)" style={{ animation: 'moveDot 3s ease-in-out infinite' }} />
-              <polygon points="30,125 26,115 34,115" fill="var(--skyblue)" />
+          <div className="hidden md:flex flex-row items-center gap-2 md:gap-8">
+            <svg width="120" height="60" viewBox="0 0 120 60" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '3' }}>
+              <path d="M 0 30 Q 30 10, 60 20 Q 90 30, 120 30" strokeDasharray="200" strokeDashoffset="0" style={{ animation: 'flow 3s ease-in-out infinite' }} />
+              <circle cx="60" cy="30" r="4" fill="var(--skyblue)" style={{ animation: 'moveDot 3s ease-in-out infinite' }} />
+              <polygon points="-5,30 5,26 5,34" fill="var(--skyblue)" />
             </svg>
             <style>{`
               @keyframes flow {
@@ -497,9 +504,9 @@ export default function Home() {
                 100% { stroke-dashoffset: 0; }
               }
               @keyframes moveDot {
-                0% { cy: 10; }
-                50% { cy: 60; }
-                100% { cy: 120; }
+                0% { cx: 20; }
+                50% { cx: 60; }
+                100% { cx: 110; }
               }
             `}</style>
           </div>
@@ -854,7 +861,7 @@ export default function Home() {
           <button
             onClick={() => {
               const message = encodeURIComponent('היי ניקול, עברתי על כל הפרטים ואני מוכנה לעשות את הצעד הבא לרכישת הקורס, אשמח לפרטים הסופיים ממך');
-              const phone = '972501234567';
+              const phone = '972542090310';
               window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
             }}
             className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2 rounded"
