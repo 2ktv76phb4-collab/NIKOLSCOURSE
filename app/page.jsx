@@ -338,7 +338,7 @@ export default function Home() {
         <div
           className="absolute inset-0 md:left-0 md:top-1/2 md:transform md:-translate-y-1/2 md:w-2/5 md:h-full w-full -bottom-20 opacity-40 md:opacity-100"
           style={{
-            backgroundImage: 'url(/images/nicole-hero.jpg)',
+            backgroundImage: 'url(/images/nicole-hero.png)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center bottom',
