@@ -336,13 +336,12 @@ export default function Home() {
       >
         {/* Background Image - Show on all devices */}
         <div
-          className="absolute inset-0 md:left-0 md:top-1/2 md:transform md:-translate-y-1/2 md:w-2/5 md:h-full w-full -bottom-20 opacity-40 md:opacity-100"
+          className="absolute left-0 top-0 w-full md:w-2/5 md:h-full md:max-h-96 opacity-30 md:opacity-100 pointer-events-none"
           style={{
             backgroundImage: 'url(/images/nicole-hero.jpg)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center bottom',
-            backgroundPositionX: 'center',
+            backgroundPosition: 'center top',
             pointerEvents: 'none',
           }}
         />
