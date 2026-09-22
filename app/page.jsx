@@ -678,7 +678,7 @@ export default function Home() {
 
         <div className="mt-8 space-y-0">
           {CONTENT.faq.items.map((item, i) => (
-            <div key={i} className="border-t" style={{ borderTopColor: 'var(--line-soft)' }}>
+            <div key={i} className="border-t reveal in" style={{ borderTopColor: 'var(--line-soft)', animationDelay: `${0.05 * (i + 1)}s` }}>
               <button
                 onClick={() => setExpandedFAQ(expandedFAQ === i ? null : i)}
                 className="w-full flex items-center justify-between py-3 hover:opacity-75 transition text-left"
@@ -696,7 +696,7 @@ export default function Home() {
               </button>
 
               {expandedFAQ === i && (
-                <div className="pb-4">
+                <div className="pb-4 reveal in">
                   <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
                     {item.a}
                   </p>
@@ -712,45 +712,66 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
         <h2 className="title mt-3">הרשמה לקורס</h2>
 
-        <form onSubmit={handleFormSubmit} className="mt-10 max-w-md mx-auto space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="שם מלא"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 border"
-            style={{ borderColor: 'var(--line)' }}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="דוא״ל"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 border"
-            style={{ borderColor: 'var(--line)' }}
-            required
-          />
-          <input
-            type="tel"
-            name="phone"
-            placeholder="טלפון"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 border"
-            style={{ borderColor: 'var(--line)' }}
-            required
-          />
+        <div className="mt-10 max-w-md mx-auto space-y-6">
+          <form onSubmit={handleFormSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="name"
+              placeholder="שם מלא"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-4 py-3 border"
+              style={{ borderColor: 'var(--line)' }}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="דוא״ל"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-3 border"
+              style={{ borderColor: 'var(--line)' }}
+              required
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="טלפון"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="w-full px-4 py-3 border"
+              style={{ borderColor: 'var(--line)' }}
+              required
+            />
+            <button
+              type="submit"
+              className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5"
+              style={{ backgroundColor: 'var(--navy)' }}
+            >
+              שלח
+            </button>
+          </form>
+
+          <div className="flex items-center gap-4">
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--line)' }}></div>
+            <span style={{ color: 'var(--navy-soft)', fontSize: '0.9rem' }}>או</span>
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--line)' }}></div>
+          </div>
+
           <button
-            type="submit"
-            className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5"
-            style={{ backgroundColor: 'var(--navy)' }}
+            onClick={() => {
+              const message = encodeURIComponent('שלום ניקול! אני מעוניינת ללמוד בקורס של לק ג\'ל ומבנה אנטומי. אפשר לשלוח לי פרטים על הקורס?');
+              const phone = '972501234567';
+              window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            }}
+            className="w-full py-3 text-white font-medium transition-transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+            style={{ backgroundColor: '#25D366' }}
           >
-            שלח
+            <span>💬</span>
+            <span>צור קשר דרך WhatsApp</span>
           </button>
-        </form>
+        </div>
       </section>
 
       {/* Footer */}
