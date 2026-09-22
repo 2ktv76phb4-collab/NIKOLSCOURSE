@@ -334,20 +334,20 @@ export default function Home() {
         className="min-h-screen flex flex-col pt-24 px-[6.4%] relative overflow-hidden md:flex-row md:items-center md:gap-8"
         style={{ backgroundColor: 'var(--cream)' }}
       >
-        {/* Background Image - Desktop only, positioned on left (RTL) */}
+        {/* Background Image - Show on all devices */}
         <div
-          className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 w-2/5 h-full"
+          className="absolute inset-0 md:left-0 md:top-1/2 md:transform md:-translate-y-1/2 md:w-2/5 md:h-full w-full -bottom-20 opacity-40 md:opacity-100"
           style={{
             backgroundImage: 'url(/images/nicole-hero.png)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
+            backgroundPosition: 'center bottom',
+            backgroundPositionX: 'center',
             pointerEvents: 'none',
-            opacity: 0.9,
           }}
         />
 
-        {/* Content - Mobile centered, Desktop right side */}
+        {/* Content - centered on mobile, right side on desktop */}
         <div className="flex-1 flex flex-col gap-9 relative z-10 md:ml-auto md:max-w-xl">
           <div className="text-center">
             <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
