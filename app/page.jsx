@@ -331,24 +331,12 @@ export default function Home() {
       {/* Hero */}
       <section
         id="hero"
-        className="min-h-screen flex flex-col pt-24 px-[6.4%] relative overflow-hidden md:flex-row md:items-center md:gap-8"
+        className="py-24 px-[6.4%] flex flex-col items-center gap-12"
         style={{ backgroundColor: 'var(--cream)' }}
       >
-        {/* Background Image - Show on all devices */}
-        <div
-          className="absolute left-0 top-0 w-full md:w-2/5 md:h-full md:max-h-96 opacity-30 md:opacity-100 pointer-events-none"
-          style={{
-            backgroundImage: 'url(/images/nicole-hero.jpg)',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center top',
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* Content - centered on mobile, right side on desktop */}
-        <div className="flex-1 flex flex-col gap-9 relative z-10 md:ml-auto md:max-w-xl">
-          <div className="text-center">
+        {/* Content - centered */}
+        <div className="flex flex-col gap-9 max-w-2xl text-center">
+          <div>
             <span className="eyebrow">{CONTENT.hero.eyebrow}</span>
             <h1 className="text-5xl md:text-6xl font-serif mt-4" style={{ color: 'var(--navy)' }}>
               {CONTENT.hero.title}
@@ -376,6 +364,19 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {/* Image - below text, centered and adaptive */}
+        <div
+          className="w-full md:w-1/2 max-w-md md:max-w-lg aspect-auto"
+          style={{
+            backgroundImage: 'url(/images/nicole-hero.jpg)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            minHeight: '400px',
+            md: { minHeight: '500px' },
+          }}
+        />
       </section>
 
       {/* Philosophy Band */}
