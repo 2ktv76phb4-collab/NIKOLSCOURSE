@@ -287,8 +287,8 @@ export default function Home() {
           padding: headerScrolled ? '0.7rem 6.4%' : '1.1rem 6.4%',
         }}
       >
-        <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <nav className="flex items-center justify-between gap-2 md:gap-4">
+          <div className="flex items-center gap-2 md:gap-3">
             <img
               src="/images/nikol-logo.png"
               alt="Nikol Logo"
@@ -299,6 +299,18 @@ export default function Home() {
                 maxWidth: '140px'
               }}
             />
+            <span
+              style={{
+                fontSize: 'clamp(10px, 2.2vw, 14px)',
+                color: 'var(--navy)',
+                fontFamily: "'Frank Ruhl Libre', serif",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                maxWidth: '120px',
+              }}
+            >
+              Creating pearls of nail masters
+            </span>
           </div>
 
           {/* Desktop Nav */}
