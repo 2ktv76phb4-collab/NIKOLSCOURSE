@@ -293,9 +293,10 @@ export default function Home() {
               src="/images/nikol-logo.png"
               alt="Nikol Logo"
               style={{
-                height: window.innerWidth < 768 ? 'clamp(35px, 6vw, 50px)' : 'clamp(40px, 8vw, 70px)',
+                height: 'clamp(35px, 5.5vw, 60px)',
                 width: 'auto',
-                objectFit: 'contain'
+                objectFit: 'contain',
+                maxWidth: '140px'
               }}
             />
           </div>
