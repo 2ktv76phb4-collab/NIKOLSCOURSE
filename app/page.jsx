@@ -559,7 +559,7 @@ export default function Home() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'clamp(400px, 80vw, 800px)',
             backgroundAttachment: 'local',
-            opacity: 0.14,
+            opacity: 0.28,
             pointerEvents: 'none',
           }}
         />
