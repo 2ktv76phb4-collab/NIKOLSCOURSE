@@ -421,21 +421,22 @@ export default function Home() {
         className="py-12 md:py-24 px-[6.4%] relative overflow-hidden"
         style={{ backgroundColor: 'var(--white)' }}
       >
-        {/* Background image with opacity overlay */}
+        {/* Blurred background image */}
         <div
           style={{
             position: 'absolute',
             top: 0,
+            left: 0,
             right: 0,
             bottom: 0,
-            width: '50%',
-            backgroundImage: 'url(/images/nikol-about.png)',
-            backgroundSize: 'contain',
+            backgroundImage: 'url(/images/nikol-silhouette-blurred.png)',
+            backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 0.48,
+            backgroundPosition: 'center bottom',
+            opacity: 0.25,
             zIndex: 0,
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            filter: 'blur(8px)'
           }}
         />
 
