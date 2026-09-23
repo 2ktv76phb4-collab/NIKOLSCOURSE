@@ -30,7 +30,7 @@ body {
   font-weight: 400;
   line-height: 1.75;
   overflow-x: hidden;
-  font-size: 15.5px;
+  font-size: clamp(14px, 2.2vw, 15.5px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -74,8 +74,14 @@ img {
 }
 
 section {
-  padding-block: 5.2rem;
+  padding-block: 3rem;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-block: 5.2rem;
+  }
 }
 
 .eyebrow {
@@ -89,7 +95,7 @@ section {
 }
 
 h2.title {
-  font-size: clamp(1.7rem, 5.4vw, 2.6rem);
+  font-size: clamp(1.4rem, 5.4vw, 2.6rem);
   font-weight: 500;
   line-height: 1.28;
   color: var(--navy);
@@ -99,6 +105,7 @@ p.lede {
   margin-top: 1rem;
   color: var(--navy-soft);
   max-width: 50ch;
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
 }
 
 .reveal {
