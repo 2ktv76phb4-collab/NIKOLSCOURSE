@@ -431,7 +431,7 @@ export default function Home() {
               src="/images/nikol-logo.png"
               alt="Nikol Logo"
               style={{
-                height: 'clamp(40px, 6vw, 65px)',
+                height: 'clamp(50px, 8vw, 85px)',
                 width: 'auto',
                 objectFit: 'contain',
                 maxWidth: 'none'
