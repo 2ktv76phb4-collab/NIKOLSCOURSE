@@ -299,7 +299,7 @@ export default function Home() {
                 maxWidth: '140px'
               }}
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
               <span
                 style={{
                   fontSize: 'clamp(12px, 2.5vw, 16px)',
@@ -307,17 +307,20 @@ export default function Home() {
                   fontFamily: "'Frank Ruhl Libre', serif",
                   fontWeight: 500,
                   lineHeight: 1.1,
+                  whiteSpace: 'nowrap'
                 }}
               >
                 ניקול
               </span>
               <span
                 style={{
-                  fontSize: 'clamp(8px, 1.8vw, 11px)',
+                  fontSize: 'clamp(9px, 2vw, 12px)',
                   color: 'var(--navy-soft)',
                   fontFamily: "'Frank Ruhl Libre', serif",
                   fontWeight: 400,
-                  lineHeight: 1.1,
+                  lineHeight: 1.2,
+                  wordBreak: 'break-word',
+                  maxWidth: '150px'
                 }}
               >
                 Creating pearls of nail masters
