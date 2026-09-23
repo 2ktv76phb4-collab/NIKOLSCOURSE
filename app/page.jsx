@@ -418,17 +418,43 @@ export default function Home() {
         <h2 className="title">{CONTENT.values.title}</h2>
         <p className="lede">{CONTENT.values.lede}</p>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           {CONTENT.values.items.map((item, i) => (
             <div
               key={i}
-              className="p-6 border-2 rounded-lg reveal in"
+              className="p-8 rounded-2xl reveal in transition-all duration-300 cursor-pointer hover:shadow-lg hover:scale-105"
               style={{
-                borderColor: 'rgba(20, 44, 74, 0.2)',
-                backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                animationDelay: `${0.1 * (i + 1)}s`
+                borderLeft: '4px solid var(--navy)',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                animationDelay: `${0.1 * (i + 1)}s`,
+                minHeight: '160px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
               }}
             >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                marginBottom: '12px'
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--taupe)',
+                  color: 'var(--cream)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                  flexShrink: 0
+                }}>
+                  {i + 1}
+                </div>
+              </div>
               <h3 className="font-serif text-lg" style={{ color: 'var(--navy)' }}>
                 {item}
               </h3>
