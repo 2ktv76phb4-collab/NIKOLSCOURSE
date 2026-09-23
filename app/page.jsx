@@ -282,9 +282,30 @@ export default function Home() {
           padding: headerScrolled ? '0.7rem 6.4%' : '1.1rem 6.4%',
         }}
       >
-        <nav className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span style={{ fontSize: '1.5rem' }}>ניקול</span>
+        <nav className="flex items-center justify-between gap-3 md:gap-4">
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/nikol-logo.png"
+              alt="Nikol Logo"
+              style={{
+                height: 'clamp(40px, 6vw, 65px)',
+                width: 'auto',
+                objectFit: 'contain',
+                maxWidth: 'none'
+              }}
+            />
+            <span
+              style={{
+                fontSize: 'clamp(14px, 2.8vw, 18px)',
+                color: 'var(--navy)',
+                fontFamily: "'Frank Ruhl Libre', serif",
+                fontWeight: 500,
+                lineHeight: 1.1,
+                whiteSpace: 'nowrap'
+              }}
+            >
+              ניקול
+            </span>
           </div>
 
           {/* Desktop Nav */}
