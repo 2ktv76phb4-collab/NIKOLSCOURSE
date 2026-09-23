@@ -288,9 +288,16 @@ export default function Home() {
         }}
       >
         <nav className="flex items-center justify-between">
-          <div className="flex flex-col items-start gap-0">
-            <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>ניקול</span>
-            <span style={{ fontSize: '0.7rem', color: 'var(--taupe)', letterSpacing: '0.05em' }}>Creating pearls of nail masters</span>
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/nikol-logo.png"
+              alt="Nikol Logo"
+              style={{
+                height: 'clamp(40px, 8vw, 70px)',
+                width: 'auto',
+                objectFit: 'contain'
+              }}
+            />
           </div>
 
           {/* Desktop Nav */}
