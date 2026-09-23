@@ -245,6 +245,7 @@ export default function Home() {
   const [expandedFAQ, setExpandedFAQ] = useState(null);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [openedMeetingModal, setOpenedMeetingModal] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -552,7 +553,7 @@ export default function Home() {
           {CONTENT.curriculum.meetings.map((meeting, i) => (
             <div key={i} className="border-t" style={{ borderTopColor: 'var(--line-soft)' }}>
               <button
-                onClick={() => setExpandedMeeting(expandedMeeting === i ? null : i)}
+                onClick={() => setOpenedMeetingModal(i)}
                 className="w-full flex items-center justify-between py-4 hover:opacity-75 transition text-left"
               >
                 <div className="flex items-center gap-4">
@@ -561,33 +562,57 @@ export default function Home() {
                   </span>
                   <h3 className="font-serif text-lg">{meeting.title}</h3>
                 </div>
-                <span
-                  style={{
-                    color: 'var(--taupe)',
-                    transform: expandedMeeting === i ? 'rotate(135deg)' : 'rotate(0)',
-                    transition: 'transform 0.3s ease',
-                  }}
-                >
-                  +
-                </span>
+                <span style={{ color: 'var(--taupe)' }}>→</span>
               </button>
-
-              {expandedMeeting === i && (
-                <div className="pb-4 pl-20 space-y-2 max-h-96 overflow-hidden">
-                  {meeting.items.map((item, j) => (
-                    <div key={j} className="flex gap-3">
-                      <span style={{ color: 'var(--taupe)' }}>—</span>
-                      <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </section>
+
+      {openedMeetingModal !== null && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setOpenedMeetingModal(null)}
+          style={{ direction: 'rtl' }}
+        >
+          <div
+            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+            style={{ backgroundColor: 'var(--cream)' }}
+          >
+            <div className="p-6 border-b" style={{ borderBottomColor: 'var(--line)' }}>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4 flex-1">
+                  <span className="font-serif italic text-3xl" style={{ color: 'var(--taupe)' }}>
+                    {CONTENT.curriculum.meetings[openedMeetingModal].num}
+                  </span>
+                  <h2 className="font-serif text-xl" style={{ color: 'var(--navy)' }}>
+                    {CONTENT.curriculum.meetings[openedMeetingModal].title}
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setOpenedMeetingModal(null)}
+                  className="text-2xl flex-shrink-0"
+                  style={{ color: 'var(--navy)' }}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6 space-y-3">
+              {CONTENT.curriculum.meetings[openedMeetingModal].items.map((item, j) => (
+                <div key={j} className="flex gap-3">
+                  <span style={{ color: 'var(--taupe)', flexShrink: 0 }}>—</span>
+                  <p style={{ color: 'var(--navy-soft)' }}>
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Receive */}
       <section id="receive" className="py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
