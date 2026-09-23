@@ -507,13 +507,13 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--cream)' }}>
         <span className="eyebrow">{content.hero.eyebrow}</span>
         <h1 className="title mt-4" style={{ color: 'var(--navy)' }}>
           {content.hero.title}
         </h1>
         <p className="lede mt-6">{content.hero.subtitle}</p>
-        <div className="mt-8 flex flex-col sm:flex-row gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center sm:justify-center">
           <button
             onClick={() => scrollToSection('curriculum')}
             className="px-8 py-3 rounded transition hover:opacity-75"
@@ -546,9 +546,11 @@ export default function Home() {
 
       {/* About */}
       <section id="about" className="py-12 md:py-24 px-[6.4%] relative" style={{ backgroundColor: 'var(--cream)' }}>
-        <span className="eyebrow">{content.about.eyebrow}</span>
-        <h2 className="title mt-3">{content.about.title}</h2>
-        <div className="mt-8 max-w-3xl" dangerouslySetInnerHTML={{ __html: content.about.text }} style={{ color: 'var(--navy-soft)', lineHeight: 1.8 }} />
+        <div className="text-center">
+          <span className="eyebrow">{content.about.eyebrow}</span>
+          <h2 className="title mt-3">{content.about.title}</h2>
+        </div>
+        <div className="mt-8 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: content.about.text }} style={{ color: 'var(--navy-soft)', lineHeight: 1.8 }} />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -565,9 +567,11 @@ export default function Home() {
 
       {/* Values */}
       <section className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
-        <span className="eyebrow">{content.values.eyebrow}</span>
-        <h2 className="title mt-3">{content.values.title}</h2>
-        <p className="lede">{content.values.lede}</p>
+        <div className="text-center">
+          <span className="eyebrow">{content.values.eyebrow}</span>
+          <h2 className="title mt-3">{content.values.title}</h2>
+          <p className="lede">{content.values.lede}</p>
+        </div>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           {content.values.items.map((item, i) => (
             <div
@@ -595,8 +599,10 @@ export default function Home() {
 
       {/* Audience */}
       <section id="audience" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
-        <span className="eyebrow">{content.audience.eyebrow}</span>
-        <h2 className="title mt-3">{content.audience.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.audience.eyebrow}</span>
+          <h2 className="title mt-3">{content.audience.title}</h2>
+        </div>
         <div className="mt-8 space-y-3">
           {content.audience.items.map((item, i) => (
             <div key={i} className="flex gap-3">
@@ -609,8 +615,10 @@ export default function Home() {
 
       {/* Transform */}
       <section id="transform" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
-        <span className="eyebrow">{content.transform.eyebrow}</span>
-        <h2 className="title mt-3">{content.transform.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.transform.eyebrow}</span>
+          <h2 className="title mt-3">{content.transform.title}</h2>
+        </div>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
           <div>
             <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
@@ -635,8 +643,10 @@ export default function Home() {
 
       {/* Why */}
       <section className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
-        <span className="eyebrow">{content.why.eyebrow}</span>
-        <h2 className="title mt-3">{content.why.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.why.eyebrow}</span>
+          <h2 className="title mt-3">{content.why.title}</h2>
+        </div>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
           {content.why.items.map((item, i) => (
             <div key={i}>
@@ -651,9 +661,11 @@ export default function Home() {
 
       {/* Curriculum */}
       <section id="curriculum" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
-        <span className="eyebrow">{content.curriculum.eyebrow}</span>
-        <h2 className="title mt-3">{content.curriculum.title}</h2>
-        <p className="lede">{content.curriculum.lede}</p>
+        <div className="text-center">
+          <span className="eyebrow">{content.curriculum.eyebrow}</span>
+          <h2 className="title mt-3">{content.curriculum.title}</h2>
+          <p className="lede">{content.curriculum.lede}</p>
+        </div>
 
         <div className="mt-8 space-y-0">
           {content.curriculum.meetings.map((meeting, i) => (
@@ -724,8 +736,10 @@ export default function Home() {
 
       {/* Receive */}
       <section id="receive" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
-        <span className="eyebrow">{content.receive.eyebrow}</span>
-        <h2 className="title mt-3">{content.receive.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.receive.eyebrow}</span>
+          <h2 className="title mt-3">{content.receive.title}</h2>
+        </div>
 
         <div className="mt-8 space-y-0">
           {content.receive.items.map((item, i) => (
@@ -743,8 +757,10 @@ export default function Home() {
 
       {/* Bonuses */}
       <section id="bonuses" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
-        <span className="eyebrow">{content.bonuses.eyebrow}</span>
-        <h2 className="title mt-3">{content.bonuses.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.bonuses.eyebrow}</span>
+          <h2 className="title mt-3">{content.bonuses.title}</h2>
+        </div>
 
         <div className="mt-10 grid grid-cols-1 gap-6">
           {content.bonuses.items.map((bonus, i) => (
@@ -772,14 +788,14 @@ export default function Home() {
       </section>
 
       {/* Workbook */}
-      <section id="workbook" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}>
+      <section id="workbook" className="py-12 md:py-24 px-[6.4%] text-center" style={{ backgroundColor: 'var(--navy)', color: 'var(--cream)' }}>
         <span className="eyebrow" style={{ color: 'var(--skyblue)' }}>
           {content.workbook.eyebrow}
         </span>
         <h2 className="title mt-3" style={{ color: 'var(--cream)' }}>
           {content.workbook.title}
         </h2>
-        <p className="mt-4" style={{ color: 'rgba(255, 249, 239, 0.75)' }}>
+        <p className="mt-4 max-w-2xl mx-auto" style={{ color: 'rgba(255, 249, 239, 0.75)' }}>
           {content.workbook.text}
         </p>
       </section>
@@ -797,8 +813,10 @@ export default function Home() {
 
       {/* FAQ */}
       <section id="faq" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--white)' }}>
-        <span className="eyebrow">{content.faq.eyebrow}</span>
-        <h2 className="title mt-3">{content.faq.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.faq.eyebrow}</span>
+          <h2 className="title mt-3">{content.faq.title}</h2>
+        </div>
 
         <div className="mt-8 space-y-0">
           {content.faq.items.map((item, i) => (
@@ -835,8 +853,10 @@ export default function Home() {
 
       {/* Structure */}
       <section id="structure" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--cream)' }}>
-        <span className="eyebrow">{content.structure.eyebrow}</span>
-        <h2 className="title mt-3">{content.structure.title}</h2>
+        <div className="text-center">
+          <span className="eyebrow">{content.structure.eyebrow}</span>
+          <h2 className="title mt-3">{content.structure.title}</h2>
+        </div>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
