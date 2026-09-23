@@ -537,7 +537,7 @@ export default function Home() {
                   animationDelay: `${0.1 * (i + 1)}s`
                 }}
               >
-                <span style={{ color: colors[i % colors.length], flexShrink: 0 }}>✓</span>
+                <span style={{ color: 'var(--navy)', flexShrink: 0, fontWeight: 'bold', fontSize: '1.2rem' }}>✓</span>
                 <span style={{ color: 'var(--navy)' }}>{item}</span>
               </div>
             );
