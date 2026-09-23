@@ -555,10 +555,11 @@ export default function Home() {
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: 'url(/images/nikol-silhouette-blurred.png)',
-            backgroundPosition: isHebrew ? 'right -20px top 140px' : 'left -20px top 140px',
+            backgroundPosition: 'center 140px',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: 'clamp(150px, 45vw, 500px)',
-            opacity: 0.13,
+            backgroundSize: 'clamp(400px, 80vw, 800px)',
+            backgroundAttachment: 'local',
+            opacity: 0.14,
             pointerEvents: 'none',
           }}
         />
