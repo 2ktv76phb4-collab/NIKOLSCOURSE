@@ -638,24 +638,60 @@ export default function Home() {
         <span className="eyebrow">{CONTENT.structure.eyebrow}</span>
         <h2 className="title">{CONTENT.structure.title}</h2>
 
-        <div className="mt-8 space-y-0">
-          {CONTENT.structure.items.map((item, i) => (
-            <div key={i} className="flex justify-between py-4 border-t" style={{ borderTopColor: 'rgba(20, 44, 74, 0.1)' }}>
-              <span className="text-sm" style={{ color: 'var(--navy-soft)' }}>
-                {item.k}
-              </span>
-              <span className="font-serif text-right">{item.v}</span>
-            </div>
-          ))}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {CONTENT.structure.items.map((item, i) => {
+            const icons = ['👥', '⏱️', '📋'];
+            const colors = ['rgba(20, 44, 74, 0.08)', 'rgba(133, 100, 78, 0.08)', 'rgba(218, 232, 246, 0.5)'];
+            return (
+              <div
+                key={i}
+                className="p-6 rounded-2xl reveal in transition-all duration-300 hover:shadow-lg hover:scale-102 cursor-pointer"
+                style={{
+                  backgroundColor: colors[i % colors.length],
+                  borderLeft: `4px solid var(--${i % 3 === 0 ? 'navy' : i % 3 === 1 ? 'taupe' : 'skyblue'})`,
+                  animationDelay: `${0.1 * (i + 1)}s`
+                }}
+              >
+                <div className="flex items-start gap-4">
+                  <div style={{ fontSize: '2rem', minWidth: '40px' }}>
+                    {icons[i % icons.length]}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <h4 className="font-serif text-sm mb-2" style={{ color: 'var(--taupe)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.75rem' }}>
+                      {item.k.split(' ')[0]}
+                    </h4>
+                    <p className="font-serif text-xl" style={{ color: 'var(--navy)', lineHeight: '1.3' }}>
+                      {item.v}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>סוגי מסלולים</h3>
+        <div className="mt-16">
+          <h3 className="font-serif text-xl mb-8 text-center" style={{ color: 'var(--navy)' }}>סוגי מסלולים</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {CONTENT.structure.schedules.map((schedule, i) => (
-              <div key={i} className="py-3 px-4 rounded mb-3" style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
-                <p className="font-serif text-sm" style={{ color: 'var(--navy)' }}>{schedule.type}</p>
-                <p className="text-xs" style={{ color: 'var(--navy-soft)' }}>{schedule.time}</p>
+              <div
+                key={i}
+                className="p-8 rounded-2xl reveal in transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer text-center"
+                style={{
+                  backgroundColor: 'var(--white)',
+                  borderTop: `4px solid var(${i === 0 ? '--navy' : '--taupe'})`,
+                  animationDelay: `${0.2 + 0.1 * i}s`
+                }}
+              >
+                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+                  {i === 0 ? '☀️' : '🌙'}
+                </div>
+                <h4 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
+                  {schedule.type}
+                </h4>
+                <p className="text-sm font-medium" style={{ color: 'var(--taupe)' }}>
+                  {schedule.time}
+                </p>
               </div>
             ))}
           </div>
