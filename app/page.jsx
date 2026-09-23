@@ -299,18 +299,30 @@ export default function Home() {
                 maxWidth: '140px'
               }}
             />
-            <span
-              style={{
-                fontSize: 'clamp(10px, 2.2vw, 14px)',
-                color: 'var(--navy)',
-                fontFamily: "'Frank Ruhl Libre', serif",
-                fontWeight: 500,
-                lineHeight: 1.2,
-                maxWidth: '120px',
-              }}
-            >
-              Creating pearls of nail masters
-            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <span
+                style={{
+                  fontSize: 'clamp(12px, 2.5vw, 16px)',
+                  color: 'var(--navy)',
+                  fontFamily: "'Frank Ruhl Libre', serif",
+                  fontWeight: 500,
+                  lineHeight: 1.1,
+                }}
+              >
+                ניקול
+              </span>
+              <span
+                style={{
+                  fontSize: 'clamp(8px, 1.8vw, 11px)',
+                  color: 'var(--navy-soft)',
+                  fontFamily: "'Frank Ruhl Libre', serif",
+                  fontWeight: 400,
+                  lineHeight: 1.1,
+                }}
+              >
+                Creating pearls of nail masters
+              </span>
+            </div>
           </div>
 
           {/* Desktop Nav */}
