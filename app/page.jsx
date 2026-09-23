@@ -552,15 +552,16 @@ export default function Home() {
         </div>
         <div className="mt-8 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: content.about.text }} style={{ color: 'var(--navy-soft)', lineHeight: 1.8 }} />
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none hidden md:block"
           style={{
             backgroundImage: 'url(/images/nikol-silhouette-blurred.png)',
-            backgroundPosition: isHebrew ? 'right' : 'left',
+            backgroundPosition: isHebrew ? 'right -100px bottom 20px' : 'left -100px bottom 20px',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: 'clamp(200px, 40vw, 500px)',
-            opacity: 0.48,
-            top: '50%',
-            transform: 'translateY(-50%)',
+            backgroundSize: 'clamp(300px, 35vw, 450px)',
+            opacity: 0.18,
+            bottom: 0,
+            right: isHebrew ? 'auto' : 0,
+            left: isHebrew ? 0 : 'auto',
           }}
         />
       </section>
