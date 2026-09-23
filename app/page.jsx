@@ -564,7 +564,7 @@ export default function Home() {
           </span>
         </h2>
 
-        <div className="mt-16 flex flex-col-reverse md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
+        <div className="mt-16 flex flex-col md:flex-row gap-8 max-w-4xl mx-auto justify-center items-center">
           <div className="flex-1 reveal in" style={{ animationDelay: '0.3s' }}>
             <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl font-serif border-2" style={{ backgroundColor: 'transparent', borderColor: 'var(--skyblue)', color: 'var(--skyblue)' }}>
               0
@@ -577,7 +577,7 @@ export default function Home() {
             <svg width="120" height="60" viewBox="0 0 120 60" style={{ stroke: 'var(--skyblue)', fill: 'none', strokeWidth: '3' }}>
               <path d="M 0 30 Q 30 10, 60 20 Q 90 30, 120 30" strokeDasharray="200" strokeDashoffset="0" style={{ animation: 'flow 3s ease-in-out infinite' }} />
               <circle cx="60" cy="30" r="4" fill="var(--skyblue)" style={{ animation: 'moveDot 3s ease-in-out infinite' }} />
-              <polygon points="-5,30 5,26 5,34" fill="var(--skyblue)" />
+              <polygon points="125,30 115,26 115,34" fill="var(--skyblue)" />
             </svg>
             <style>{`
               @keyframes flow {
