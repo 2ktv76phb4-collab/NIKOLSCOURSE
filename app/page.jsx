@@ -418,10 +418,29 @@ export default function Home() {
       {/* About */}
       <section
         id="about"
-        className="py-12 md:py-24 px-[6.4%]"
+        className="py-12 md:py-24 px-[6.4%] relative overflow-hidden"
         style={{ backgroundColor: 'var(--white)' }}
       >
-        <div className="max-w-3xl">
+        {/* Background image with opacity overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '50%',
+            backgroundImage: 'url(/images/nikol-about.png)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 0.48,
+            zIndex: 0,
+            pointerEvents: 'none'
+          }}
+        />
+
+        {/* Content with z-index */}
+        <div style={{ position: 'relative', zIndex: 1 }} className="max-w-3xl">
           <span className="eyebrow">{CONTENT.about.eyebrow}</span>
           <h2 className="title">{CONTENT.about.title}</h2>
           <p
