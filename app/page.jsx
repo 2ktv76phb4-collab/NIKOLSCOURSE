@@ -397,6 +397,11 @@ export default function Home() {
     }
   };
 
+  const navigateToGallery = () => {
+    setMobileMenuOpen(false);
+    window.location.href = '/gallery';
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log('Form submission:', formData);
@@ -452,7 +457,7 @@ export default function Home() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex gap-8">
+          <nav className="hidden md:flex gap-8 items-center">
             {content.nav.map((item) => (
               <button
                 key={item.href}
@@ -463,6 +468,14 @@ export default function Home() {
                 {item.label}
               </button>
             ))}
+            <div style={{ width: '1px', height: '20px', backgroundColor: 'var(--line)' }}></div>
+            <button
+              onClick={navigateToGallery}
+              className="text-sm hover:text-opacity-70 transition"
+              style={{ color: 'var(--navy)' }}
+            >
+              {language === 'he' ? 'גלריה' : language === 'en' ? 'Gallery' : 'Галерея'}
+            </button>
           </nav>
 
           {/* Language Toggle & Mobile Menu */}
@@ -502,6 +515,14 @@ export default function Home() {
                 {item.label}
               </button>
             ))}
+            <div style={{ height: '1px', backgroundColor: 'var(--line)', margin: '0.5rem 0' }}></div>
+            <button
+              onClick={navigateToGallery}
+              className="hover:text-opacity-70 transition py-2"
+              style={{ color: 'var(--navy)', textAlign: isHebrew ? 'right' : 'left' }}
+            >
+              {language === 'he' ? 'גלריה' : language === 'en' ? 'Gallery' : 'Галерея'}
+            </button>
           </div>
         )}
       </header>
