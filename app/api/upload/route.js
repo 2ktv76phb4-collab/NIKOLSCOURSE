@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -24,18 +26,31 @@ export async function POST(request) {
 
     // Get Cloudinary config
     const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
-    if (!cloudName) {
+    if (!cloudName || !apiKey || !apiSecret) {
       return Response.json(
-        { error: 'Cloudinary cloud name not configured' },
+        { error: 'Cloudinary configuration missing' },
         { status: 500 }
       );
     }
 
-    // Prepare Cloudinary upload
+    // Create signature for secure upload
+    const timestamp = Math.floor(Date.now() / 1000);
+    const signatureString = `public_id=nikol_${timestamp}_${file.name.replace(/[^a-zA-Z0-9]/g, '')}&timestamp=${timestamp}${apiSecret}`;
+    const signature = crypto
+      .createHash('sha1')
+      .update(signatureString)
+      .digest('hex');
+
+    // Prepare Cloudinary upload with signature
     const uploadFormData = new FormData();
     uploadFormData.append('file', file);
-    uploadFormData.append('upload_preset', 'nikol_gallery');
+    uploadFormData.append('api_key', apiKey);
+    uploadFormData.append('timestamp', timestamp);
+    uploadFormData.append('signature', signature);
+    uploadFormData.append('public_id', `nikol_${timestamp}_${file.name.replace(/[^a-zA-Z0-9]/g, '')}`);
 
     // Upload to Cloudinary
     const uploadUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
