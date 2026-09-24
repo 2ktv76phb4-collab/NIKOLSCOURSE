@@ -397,6 +397,11 @@ export default function Home() {
     }
   };
 
+  const navigateToGallery = () => {
+    setMobileMenuOpen(false);
+    window.location.href = '/gallery';
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log('Form submission:', formData);
@@ -452,7 +457,7 @@ export default function Home() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex gap-8">
+          <nav className="hidden md:flex gap-8 items-center">
             {content.nav.map((item) => (
               <button
                 key={item.href}
@@ -463,6 +468,14 @@ export default function Home() {
                 {item.label}
               </button>
             ))}
+            <div style={{ width: '1px', height: '20px', backgroundColor: 'var(--line)' }}></div>
+            <button
+              onClick={navigateToGallery}
+              className="text-sm hover:text-opacity-70 transition"
+              style={{ color: 'var(--navy)' }}
+            >
+              {language === 'he' ? 'גלריה' : language === 'en' ? 'Gallery' : 'Галерея'}
+            </button>
           </nav>
 
           {/* Language Toggle & Mobile Menu */}
@@ -502,6 +515,14 @@ export default function Home() {
                 {item.label}
               </button>
             ))}
+            <div style={{ height: '1px', backgroundColor: 'var(--line)', margin: '0.5rem 0' }}></div>
+            <button
+              onClick={navigateToGallery}
+              className="hover:text-opacity-70 transition py-2"
+              style={{ color: 'var(--navy)', textAlign: isHebrew ? 'right' : 'left' }}
+            >
+              {language === 'he' ? 'גלריה' : language === 'en' ? 'Gallery' : 'Галерея'}
+            </button>
           </div>
         )}
       </header>
@@ -619,24 +640,24 @@ export default function Home() {
           <span className="eyebrow">{content.transform.eyebrow}</span>
           <h2 className="title mt-3">{content.transform.title}</h2>
         </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
-          <div>
-            <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
+        <div className="mt-12 flex flex-col md:flex-row items-stretch justify-center gap-6 max-w-4xl mx-auto">
+          <div className="flex-1 border border-solid p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
               {content.transform.start.heading}
             </h3>
-            <p style={{ color: 'var(--navy-soft)' }}>{content.transform.start.text}</p>
+            <p style={{ color: 'var(--navy-soft)', lineHeight: 1.7 }}>{content.transform.start.text}</p>
           </div>
-          <div className="relative flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" style={{ color: 'var(--navy)' }}>
+          <div className="flex items-center justify-center md:px-4">
+            <svg width="50" height="50" viewBox="0 0 40 40" style={{ color: 'var(--navy)' }}>
               <path d="M 5 20 L 35 20" stroke="currentColor" strokeWidth="2" fill="none" />
               <path d="M 30 15 L 35 20 L 30 25" stroke="currentColor" strokeWidth="2" fill="none" />
             </svg>
           </div>
-          <div className="md:col-start-2">
-            <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
+          <div className="flex-1 border border-solid p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
               {content.transform.end.heading}
             </h3>
-            <p style={{ color: 'var(--navy-soft)' }}>{content.transform.end.text}</p>
+            <p style={{ color: 'var(--navy-soft)', lineHeight: 1.7 }}>{content.transform.end.text}</p>
           </div>
         </div>
       </section>
@@ -858,77 +879,113 @@ export default function Home() {
           <h2 className="title mt-3">{content.structure.title}</h2>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <p className="text-sm mb-6" style={{ color: 'var(--navy-soft)' }}>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Course Details Card */}
+          <div className="border p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <p className="text-xs font-medium mb-5 tracking-wide" style={{ color: 'var(--taupe)', textTransform: 'uppercase' }}>
               {content.structure.format}
             </p>
-            <div className="space-y-4">
-              {content.structure.items.map((item, i) => (
+            <div className="space-y-5">
+              {content.structure.items.slice(0, 3).map((item, i) => (
                 <div key={i}>
-                  <p className="text-sm font-medium" style={{ color: 'var(--taupe)' }}>
+                  <p className="text-xs font-medium mb-1" style={{ color: 'var(--taupe)' }}>
                     {item.k}
                   </p>
-                  <p style={{ color: 'var(--navy-soft)' }}>{item.v}</p>
+                  <p className="text-sm" style={{ color: 'var(--navy)' }}>
+                    {item.v}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-          <div>
-            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
-              {content.structure.location.heading}
+
+          {/* Schedule Card */}
+          <div className="border p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="text-sm font-medium mb-5 tracking-wide" style={{ color: 'var(--taupe)', textTransform: 'uppercase' }}>
+              {language === 'he' ? 'זמנים' : language === 'en' ? 'Schedule' : 'Расписание'}
             </h3>
-            <div className="space-y-2">
-              {content.structure.location.lines.map((line, i) => (
-                <p key={i} style={{ color: 'var(--navy-soft)' }}>
-                  {line}
-                </p>
+            <div className="space-y-5">
+              {content.structure.items.slice(3, 6).map((item, i) => (
+                <div key={i + 3}>
+                  <p className="text-xs font-medium mb-1" style={{ color: 'var(--taupe)' }}>
+                    {item.k}
+                  </p>
+                  <p className="text-sm" style={{ color: 'var(--navy)' }}>
+                    {item.v}
+                  </p>
+                </div>
               ))}
             </div>
-            <p className="mt-4 text-sm" style={{ color: 'var(--navy-soft)' }}>
+          </div>
+
+          {/* Cost Card */}
+          <div className="border p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="text-sm font-medium mb-5 tracking-wide" style={{ color: 'var(--taupe)', textTransform: 'uppercase' }}>
+              {language === 'he' ? 'עלות' : language === 'en' ? 'Investment' : 'Стоимость'}
+            </h3>
+            <p className="text-sm font-medium mb-5" style={{ color: 'var(--navy)' }}>
+              {content.structure.items[6].v}
+            </p>
+            <p className="text-sm" style={{ color: 'var(--navy-soft)' }}>
               {content.structure.payment}
             </p>
+          </div>
+        </div>
+
+        {/* Location Card */}
+        <div className="mt-8 max-w-3xl mx-auto border p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+          <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
+            {content.structure.location.heading}
+          </h3>
+          <div className="space-y-2">
+            {content.structure.location.lines.map((line, i) => (
+              <p key={i} className="text-sm" style={{ color: 'var(--navy-soft)' }}>
+                {line}
+              </p>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section id="cta" className="py-12 md:py-24 px-[6.4%]" style={{ backgroundColor: 'var(--skyblue)' }}>
-        <div className="max-w-md">
+      <section id="cta" className="py-12 md:py-24 px-[6.4%] flex justify-center" style={{ backgroundColor: 'var(--skyblue)' }}>
+        <div className="w-full max-w-md text-center">
           <span className="eyebrow">{language === 'he' ? 'צור קשר' : language === 'en' ? 'Get in Touch' : 'Свяжитесь со мной'}</span>
           <h2 className="title mt-3">{language === 'he' ? 'מוכנה להתחיל?' : language === 'en' ? 'Ready to Begin?' : 'Готовы начать?'}</h2>
-          <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
+          <p className="lede mt-4" style={{ color: 'var(--navy-soft)' }}>{language === 'he' ? 'השאר פרטים ונחזור אליך עם כל המידע שצריך' : language === 'en' ? 'Leave your details and we\'ll get back to you with everything you need' : 'Оставьте свои данные, и мы свяжемся с вами со всей необходимой информацией'}</p>
+          <form onSubmit={handleFormSubmit} className="mt-8 space-y-4">
             <input
               type="text"
               placeholder={language === 'he' ? 'שמך' : language === 'en' ? 'Your Name' : 'Ваше имя'}
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 rounded border"
-              style={{ borderColor: 'var(--line)', backgroundColor: 'var(--cream)' }}
+              className="w-full px-4 py-3 rounded border"
+              style={{ borderColor: 'var(--line)', backgroundColor: 'rgba(255, 249, 239, 0.8)' }}
             />
             <input
               type="email"
               placeholder={language === 'he' ? 'אימייל' : language === 'en' ? 'Email' : 'Email'}
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 rounded border"
-              style={{ borderColor: 'var(--line)', backgroundColor: 'var(--cream)' }}
+              className="w-full px-4 py-3 rounded border"
+              style={{ borderColor: 'var(--line)', backgroundColor: 'rgba(255, 249, 239, 0.8)' }}
             />
             <input
               type="tel"
               placeholder={language === 'he' ? 'פלאפון' : language === 'en' ? 'Phone' : 'Телефон'}
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-2 rounded border"
-              style={{ borderColor: 'var(--line)', backgroundColor: 'var(--cream)' }}
+              className="w-full px-4 py-3 rounded border"
+              style={{ borderColor: 'var(--line)', backgroundColor: 'rgba(255, 249, 239, 0.8)' }}
             />
             <button
               type="submit"
-              className="w-full px-4 py-2 rounded transition hover:opacity-75"
+              className="w-full px-4 py-3 rounded transition hover:opacity-75 font-medium"
               style={{
                 backgroundColor: 'var(--navy)',
                 color: 'var(--cream)',
-                fontWeight: 500
+                fontWeight: 500,
+                marginTop: '1.5rem'
               }}
             >
               {language === 'he' ? 'שלח' : language === 'en' ? 'Send' : 'Отправить'}
