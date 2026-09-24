@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
 export async function DELETE(request, { params }) {
@@ -32,7 +33,6 @@ export async function DELETE(request, { params }) {
 
       const timestamp = Math.floor(Date.now() / 1000);
       const signatureString = `public_id=${item.cloudinary_id}&timestamp=${timestamp}${apiSecret}`;
-      const crypto = require('crypto');
       const signature = crypto.createHash('sha1').update(signatureString).digest('hex');
 
       await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
