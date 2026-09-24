@@ -1,7 +1,3 @@
-import { writeFile, readFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
-
 export async function POST(request) {
   try {
     const formData = await request.formData();
@@ -26,47 +22,47 @@ export async function POST(request) {
       );
     }
 
-    // Create images directory if it doesn't exist
-    const imagesDir = join(process.cwd(), 'public/images');
-    if (!existsSync(imagesDir)) {
-      await mkdir(imagesDir, { recursive: true });
+    // Upload to Cloudinary
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+    if (!cloudName) {
+      return Response.json(
+        { error: 'Cloudinary configuration missing' },
+        { status: 500 }
+      );
     }
 
-    // Generate unique filename
-    const timestamp = Date.now();
-    const filename = `gallery-${timestamp}-${file.name}`;
-    const filepath = join(imagesDir, filename);
+    const cloudinaryFormData = new FormData();
+    cloudinaryFormData.append('file', file);
+    cloudinaryFormData.append('upload_preset', 'nikol_gallery');
 
-    // Convert file to buffer and write
-    const bytes = await file.arrayBuffer();
-    await writeFile(filepath, Buffer.from(bytes));
-
-    // Read existing gallery data
-    const dataFile = join(process.cwd(), 'public/gallery-data.json');
-    let galleryData = [];
-
-    if (existsSync(dataFile)) {
-      try {
-        const data = await readFile(dataFile, 'utf-8');
-        galleryData = JSON.parse(data);
-      } catch (e) {
-        galleryData = [];
+    const uploadResponse = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: 'POST',
+        body: cloudinaryFormData,
       }
+    );
+
+    if (!uploadResponse.ok) {
+      const error = await uploadResponse.json();
+      return Response.json(
+        { error: error.error?.message || 'Cloudinary upload failed' },
+        { status: 400 }
+      );
     }
 
-    // Add new item
+    const uploadedImage = await uploadResponse.json();
+
+    // Add new item to gallery data
     const newItem = {
       id: Date.now(),
       title: title || 'Untitled',
       description: description || '',
       category: category || 'Nail Art',
-      image: `/images/${filename}`
+      image: uploadedImage.secure_url,
+      cloudinaryId: uploadedImage.public_id
     };
-
-    galleryData.push(newItem);
-
-    // Save updated gallery data
-    await writeFile(dataFile, JSON.stringify(galleryData, null, 2));
 
     return Response.json(
       { success: true, item: newItem },
