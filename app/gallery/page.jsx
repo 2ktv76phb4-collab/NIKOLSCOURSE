@@ -2,27 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-const GALLERY_ITEMS = [
+const DEFAULT_ITEMS = [
   {
     id: 1,
     title: 'עבודה מס׳ 1',
     description: 'תיאור העבודה יופיע כאן',
     image: '/images/gallery-placeholder-1.jpg',
     category: 'ג\'ל ציפורן'
-  },
-  {
-    id: 2,
-    title: 'עבודה מס׳ 2',
-    description: 'תיאור העבודה יופיע כאן',
-    image: '/images/gallery-placeholder-2.jpg',
-    category: 'מבנה אנטומי'
-  },
-  {
-    id: 3,
-    title: 'עבודה מס׳ 3',
-    description: 'תיאור העבודה יופיע כאן',
-    image: '/images/gallery-placeholder-3.jpg',
-    category: 'ג׳ל ציפורן'
   },
 ];
 
@@ -32,6 +18,7 @@ export default function Gallery() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [galleryItems, setGalleryItems] = useState(DEFAULT_ITEMS);
 
   const isHebrew = language === 'he';
   const dir = language === 'ru' ? 'ltr' : (isHebrew ? 'rtl' : 'ltr');
@@ -41,6 +28,24 @@ export default function Gallery() {
     if (saved && ['he', 'en', 'ru'].includes(saved)) {
       setLanguage(saved);
     }
+  }, []);
+
+  useEffect(() => {
+    // Load gallery data from JSON file
+    const loadGalleryData = async () => {
+      try {
+        const response = await fetch('/gallery-data.json');
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setGalleryItems(data);
+          }
+        }
+      } catch (error) {
+        console.log('Using default gallery items');
+      }
+    };
+    loadGalleryData();
   }, []);
 
   useEffect(() => {
@@ -68,14 +73,14 @@ export default function Gallery() {
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % GALLERY_ITEMS.length);
+    setCurrentIndex((prev) => (prev + 1) % galleryItems.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length);
+    setCurrentIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
   };
 
-  const currentItem = GALLERY_ITEMS[currentIndex];
+  const currentItem = galleryItems[currentIndex];
 
   const translations = {
     he: {
@@ -232,7 +237,7 @@ export default function Gallery() {
               className="absolute bottom-4 left-4 md:bottom-6 md:left-6 px-3 py-1 rounded text-sm font-medium"
               style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
             >
-              {currentIndex + 1} / {GALLERY_ITEMS.length}
+              {currentIndex + 1} / {galleryItems.length}
             </div>
           </div>
 
@@ -255,7 +260,7 @@ export default function Gallery() {
 
           {/* Dots Navigation */}
           <div className="mt-8 flex justify-center gap-2">
-            {GALLERY_ITEMS.map((_, i) => (
+            {galleryItems.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
