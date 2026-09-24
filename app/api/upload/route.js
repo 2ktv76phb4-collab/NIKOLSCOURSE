@@ -22,46 +22,47 @@ export async function POST(request) {
       );
     }
 
-    // Upload to Cloudinary
+    // Get Cloudinary config
     const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
     if (!cloudName) {
       return Response.json(
-        { error: 'Cloudinary configuration missing' },
+        { error: 'Cloudinary cloud name not configured' },
         { status: 500 }
       );
     }
 
-    const cloudinaryFormData = new FormData();
-    cloudinaryFormData.append('file', file);
-    cloudinaryFormData.append('upload_preset', 'nikol_gallery');
+    // Prepare Cloudinary upload
+    const uploadFormData = new FormData();
+    uploadFormData.append('file', file);
+    uploadFormData.append('upload_preset', 'nikol_gallery');
 
-    const uploadResponse = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      {
-        method: 'POST',
-        body: cloudinaryFormData,
-      }
-    );
+    // Upload to Cloudinary
+    const uploadUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+    const uploadResponse = await fetch(uploadUrl, {
+      method: 'POST',
+      body: uploadFormData,
+    });
+
+    const responseData = await uploadResponse.json();
 
     if (!uploadResponse.ok) {
-      const error = await uploadResponse.json();
+      console.error('Cloudinary error:', responseData);
       return Response.json(
-        { error: error.error?.message || 'Cloudinary upload failed' },
+        { error: responseData.error?.message || 'Cloudinary upload failed' },
         { status: 400 }
       );
     }
 
-    const uploadedImage = await uploadResponse.json();
-
-    // Add new item to gallery data
+    // Return success with image data
     const newItem = {
       id: Date.now(),
       title: title || 'Untitled',
       description: description || '',
       category: category || 'Nail Art',
-      image: uploadedImage.secure_url,
-      cloudinaryId: uploadedImage.public_id
+      image: responseData.secure_url,
+      cloudinaryId: responseData.public_id
     };
 
     return Response.json(
@@ -71,7 +72,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Upload error:', error);
     return Response.json(
-      { error: error.message },
+      { error: `Server error: ${error.message}` },
       { status: 500 }
     );
   }
