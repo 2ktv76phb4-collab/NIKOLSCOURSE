@@ -19,6 +19,9 @@ export default function Gallery() {
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [galleryItems, setGalleryItems] = useState(DEFAULT_ITEMS);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editData, setEditData] = useState(null);
+  const [password, setPassword] = useState('');
 
   const isHebrew = language === 'he';
   const dir = language === 'ru' ? 'ltr' : (isHebrew ? 'rtl' : 'ltr');
@@ -31,14 +34,20 @@ export default function Gallery() {
   }, []);
 
   useEffect(() => {
-    // Load gallery data from JSON file
     const loadGalleryData = async () => {
       try {
-        const response = await fetch('/gallery-data.json');
+        const response = await fetch('/api/gallery');
         if (response.ok) {
           const data = await response.json();
           if (data && data.length > 0) {
-            setGalleryItems(data);
+            setGalleryItems(data.map(item => ({
+              id: item.id,
+              title: item.title,
+              description: item.description,
+              category: item.category,
+              image: item.image_url,
+              cloudinary_id: item.cloudinary_id
+            })));
           }
         }
       } catch (error) {
@@ -82,21 +91,110 @@ export default function Gallery() {
 
   const currentItem = galleryItems[currentIndex];
 
+  const handleDelete = async () => {
+    if (!password || password !== 'NIKOL123456789') {
+      alert(language === 'he' ? 'סיסמא שגויה' : language === 'en' ? 'Invalid password' : 'Неверный пароль');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/gallery/${selectedItem.id}`, {
+        method: 'DELETE',
+        headers: { 'x-password': password }
+      });
+
+      if (response.ok) {
+        setGalleryItems(galleryItems.filter(item => item.id !== selectedItem.id));
+        setSelectedItem(null);
+        setPassword('');
+        alert(language === 'he' ? 'התמונה נמחקה בהצלחה' : language === 'en' ? 'Image deleted successfully' : 'Изображение удалено успешно');
+      } else {
+        alert(language === 'he' ? 'שגיאה במחיקה' : 'Error deleting image');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert(language === 'he' ? 'שגיאה במחיקה' : 'Error deleting image');
+    }
+  };
+
+  const handleEdit = async () => {
+    if (!password || password !== 'NIKOL123456789') {
+      alert(language === 'he' ? 'סיסמא שגויה' : language === 'en' ? 'Invalid password' : 'Неверный пароль');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/gallery/${selectedItem.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: editData.title,
+          description: editData.description,
+          category: editData.category,
+          password
+        })
+      });
+
+      if (response.ok) {
+        const updated = await response.json();
+        setGalleryItems(galleryItems.map(item =>
+          item.id === selectedItem.id ? { ...item, ...updated.item } : item
+        ));
+        setSelectedItem(null);
+        setIsEditMode(false);
+        setPassword('');
+        alert(language === 'he' ? 'התמונה עודכנה בהצלחה' : language === 'en' ? 'Image updated successfully' : 'Изображение обновлено успешно');
+      } else {
+        alert(language === 'he' ? 'שגיאה בעדכון' : 'Error updating image');
+      }
+    } catch (error) {
+      console.error('Edit error:', error);
+      alert(language === 'he' ? 'שגיאה בעדכון' : 'Error updating image');
+    }
+  };
+
   const translations = {
     he: {
       gallery: 'גלריית עבודות',
       home: 'בחזרה לעמוד הבית',
-      clickForDetails: 'לחץ על התמונה לפרטים נוספים'
+      clickForDetails: 'לחץ על התמונה לפרטים נוספים',
+      edit: 'עריכה',
+      delete: 'מחיקה',
+      password: 'סיסמא',
+      title: 'כותרת',
+      description: 'תיאור',
+      category: 'קטגוריה',
+      save: 'שמור',
+      cancel: 'ביטול',
+      enterPassword: 'הזן סיסמא'
     },
     en: {
       gallery: 'Work Gallery',
       home: 'Back to Home',
-      clickForDetails: 'Click on the image for more details'
+      clickForDetails: 'Click on the image for more details',
+      edit: 'Edit',
+      delete: 'Delete',
+      password: 'Password',
+      title: 'Title',
+      description: 'Description',
+      category: 'Category',
+      save: 'Save',
+      cancel: 'Cancel',
+      enterPassword: 'Enter password'
     },
     ru: {
       gallery: 'Галерея работ',
       home: 'Вернуться домой',
-      clickForDetails: 'Нажмите на изображение для деталей'
+      clickForDetails: 'Нажмите на изображение для деталей',
+      edit: 'Редактировать',
+      delete: 'Удалить',
+      password: 'Пароль',
+      title: 'Название',
+      description: 'Описание',
+      category: 'Категория',
+      save: 'Сохранить',
+      cancel: 'Отмена',
+      enterPassword: 'Введите пароль'
     }
   };
 
@@ -278,7 +376,11 @@ export default function Gallery() {
       {selectedItem && (
         <div
           className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedItem(null)}
+          onClick={() => {
+            setSelectedItem(null);
+            setIsEditMode(false);
+            setPassword('');
+          }}
           style={{ direction: dir }}
         >
           <div
@@ -286,32 +388,186 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
             style={{ backgroundColor: 'var(--cream)' }}
           >
-            <div className="relative flex-1 min-h-[300px] md:min-h-[500px]">
-              <img
-                src={selectedItem.image}
-                alt={selectedItem.title}
-                className="w-full h-full object-cover"
-              />
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 text-3xl flex-shrink-0 w-10 h-10 flex items-center justify-center rounded"
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
-              >
-                ✕
-              </button>
-            </div>
+            {!isEditMode ? (
+              <>
+                <div className="relative flex-1 min-h-[300px] md:min-h-[500px]">
+                  <img
+                    src={selectedItem.image}
+                    alt={selectedItem.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    onClick={() => {
+                      setSelectedItem(null);
+                      setIsEditMode(false);
+                      setPassword('');
+                    }}
+                    className="absolute top-4 right-4 text-3xl flex-shrink-0 w-10 h-10 flex items-center justify-center rounded"
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}
+                  >
+                    ✕
+                  </button>
+                </div>
 
-            <div className="p-6 border-t" style={{ borderTopColor: 'var(--line)' }}>
-              <p className="text-xs font-medium mb-2" style={{ color: 'var(--taupe)', textTransform: 'uppercase' }}>
-                {selectedItem.category}
-              </p>
-              <h2 className="font-serif text-2xl mb-4" style={{ color: 'var(--navy)' }}>
-                {selectedItem.title}
-              </h2>
-              <p style={{ color: 'var(--navy-soft)', lineHeight: 1.8 }}>
-                {selectedItem.description}
-              </p>
-            </div>
+                <div className="p-6 border-t" style={{ borderTopColor: 'var(--line)' }}>
+                  <p className="text-xs font-medium mb-2" style={{ color: 'var(--taupe)', textTransform: 'uppercase' }}>
+                    {selectedItem.category}
+                  </p>
+                  <h2 className="font-serif text-2xl mb-4" style={{ color: 'var(--navy)' }}>
+                    {selectedItem.title}
+                  </h2>
+                  <p style={{ color: 'var(--navy-soft)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                    {selectedItem.description}
+                  </p>
+
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => {
+                        setIsEditMode(true);
+                        setEditData({
+                          title: selectedItem.title,
+                          description: selectedItem.description,
+                          category: selectedItem.category
+                        });
+                      }}
+                      className="flex-1 px-4 py-2 rounded transition text-sm font-medium"
+                      style={{
+                        backgroundColor: 'var(--navy)',
+                        color: 'var(--cream)',
+                      }}
+                    >
+                      {trans.edit}
+                    </button>
+                    <button
+                      onClick={() => setPassword(prompt(trans.enterPassword) || '')}
+                      className="flex-1 px-4 py-2 rounded transition text-sm font-medium"
+                      style={{
+                        backgroundColor: '#dc2626',
+                        color: 'white',
+                      }}
+                    >
+                      {trans.delete}
+                    </button>
+                  </div>
+
+                  {password && (
+                    <div className="mt-4 flex gap-2">
+                      <button
+                        onClick={handleDelete}
+                        className="flex-1 px-4 py-2 rounded transition text-sm font-medium"
+                        style={{
+                          backgroundColor: '#dc2626',
+                          color: 'white',
+                        }}
+                      >
+                        {trans.delete}
+                      </button>
+                      <button
+                        onClick={() => setPassword('')}
+                        className="flex-1 px-4 py-2 rounded transition text-sm font-medium"
+                        style={{
+                          backgroundColor: 'var(--line)',
+                          color: 'var(--navy)',
+                        }}
+                      >
+                        {trans.cancel}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="p-6">
+                <h2 className="font-serif text-2xl mb-6" style={{ color: 'var(--navy)' }}>
+                  {trans.edit}
+                </h2>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy)' }}>
+                      {trans.title}
+                    </label>
+                    <input
+                      type="text"
+                      value={editData.title}
+                      onChange={(e) => setEditData({ ...editData, title: e.target.value })}
+                      className="w-full px-4 py-2 rounded border"
+                      style={{ borderColor: 'var(--line)' }}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy)' }}>
+                      {trans.description}
+                    </label>
+                    <textarea
+                      value={editData.description}
+                      onChange={(e) => setEditData({ ...editData, description: e.target.value })}
+                      className="w-full px-4 py-2 rounded border"
+                      style={{ borderColor: 'var(--line)' }}
+                      rows="4"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy)' }}>
+                      {trans.category}
+                    </label>
+                    <select
+                      value={editData.category}
+                      onChange={(e) => setEditData({ ...editData, category: e.target.value })}
+                      className="w-full px-4 py-2 rounded border"
+                      style={{ borderColor: 'var(--line)' }}
+                    >
+                      <option>ג׳ל ציפורן</option>
+                      <option>מבנה אנטומי</option>
+                      <option>הסרה ומניקור</option>
+                      <option>עיצוב</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2" style={{ color: 'var(--navy)' }}>
+                      {trans.password}
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-2 rounded border"
+                      style={{ borderColor: 'var(--line)' }}
+                      placeholder="••••••••••••"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 pt-4">
+                    <button
+                      onClick={handleEdit}
+                      className="flex-1 px-4 py-2 rounded transition font-medium"
+                      style={{
+                        backgroundColor: 'var(--navy)',
+                        color: 'var(--cream)',
+                      }}
+                    >
+                      {trans.save}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsEditMode(false);
+                        setPassword('');
+                      }}
+                      className="flex-1 px-4 py-2 rounded transition font-medium"
+                      style={{
+                        backgroundColor: 'var(--line)',
+                        color: 'var(--navy)',
+                      }}
+                    >
+                      {trans.cancel}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

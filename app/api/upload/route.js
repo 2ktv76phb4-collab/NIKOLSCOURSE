@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request) {
   try {
@@ -70,18 +71,34 @@ export async function POST(request) {
       );
     }
 
-    // Return success with image data
-    const newItem = {
-      id: Date.now(),
-      title: title || 'Untitled',
-      description: description || '',
-      category: category || 'Nail Art',
-      image: responseData.secure_url,
-      cloudinaryId: responseData.public_id
-    };
+    // Save to Supabase
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+    );
+
+    const { data, error } = await supabase
+      .from('gallery_items')
+      .insert({
+        title: title || 'Untitled',
+        description: description || '',
+        category: category || 'Nail Art',
+        cloudinary_id: responseData.public_id,
+        image_url: responseData.secure_url
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return Response.json(
+        { error: `Database error: ${error.message}` },
+        { status: 500 }
+      );
+    }
 
     return Response.json(
-      { success: true, item: newItem },
+      { success: true, item: data },
       { status: 200 }
     );
   } catch (error) {
