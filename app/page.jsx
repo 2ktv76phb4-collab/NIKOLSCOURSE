@@ -619,24 +619,24 @@ export default function Home() {
           <span className="eyebrow">{content.transform.eyebrow}</span>
           <h2 className="title mt-3">{content.transform.title}</h2>
         </div>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
-          <div>
-            <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
+        <div className="mt-12 flex flex-col md:flex-row items-stretch justify-center gap-6 max-w-4xl mx-auto">
+          <div className="flex-1 border border-solid p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
               {content.transform.start.heading}
             </h3>
-            <p style={{ color: 'var(--navy-soft)' }}>{content.transform.start.text}</p>
+            <p style={{ color: 'var(--navy-soft)', lineHeight: 1.7 }}>{content.transform.start.text}</p>
           </div>
-          <div className="relative flex items-center justify-center">
-            <svg width="40" height="40" viewBox="0 0 40 40" style={{ color: 'var(--navy)' }}>
+          <div className="flex items-center justify-center md:px-4">
+            <svg width="50" height="50" viewBox="0 0 40 40" style={{ color: 'var(--navy)' }}>
               <path d="M 5 20 L 35 20" stroke="currentColor" strokeWidth="2" fill="none" />
               <path d="M 30 15 L 35 20 L 30 25" stroke="currentColor" strokeWidth="2" fill="none" />
             </svg>
           </div>
-          <div className="md:col-start-2">
-            <h3 className="font-serif text-lg mb-3" style={{ color: 'var(--navy)' }}>
+          <div className="flex-1 border border-solid p-6 rounded-lg" style={{ borderColor: 'var(--line)', backgroundColor: 'var(--white)' }}>
+            <h3 className="font-serif text-lg mb-4" style={{ color: 'var(--navy)' }}>
               {content.transform.end.heading}
             </h3>
-            <p style={{ color: 'var(--navy-soft)' }}>{content.transform.end.text}</p>
+            <p style={{ color: 'var(--navy-soft)', lineHeight: 1.7 }}>{content.transform.end.text}</p>
           </div>
         </div>
       </section>
