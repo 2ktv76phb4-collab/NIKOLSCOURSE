@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function DELETE(request, { params }) {
   try {
-    const id = parseInt(params.id, 10);
+    const id = params.id;
     const password = request.headers.get('x-password');
 
     if (password !== 'NIKOL123456789') {
@@ -73,7 +73,7 @@ export async function DELETE(request, { params }) {
 
 export async function PATCH(request, { params }) {
   try {
-    const id = parseInt(params.id, 10);
+    const id = params.id;
     const body = await request.json();
     const { title, description, category, password } = body;
 
